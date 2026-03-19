@@ -1,5 +1,7 @@
 package classePrincipal;
 
-public class Classe {
+import java.util.ArrayList;
 
+public class Classe {
+	private ArrayList<Etudiant> list_classe;
 }
