@@ -5,21 +5,11 @@ import java.util.ArrayList;
 public class Etudiant {
 	private String nom;
 	private String prenom;
-<<<<<<< Updated upstream
 	private ArrayList<Evaluation> list;
-	
-	public void ajouter_note(double n, double c, int b) {
-		Evaluation a = new Evaluation(n, c, b);
-		list.add(a);
-		
-	}
-=======
-	private ArrayList<Evaluation> control_continue;
 	
 	public Etudiant(String n, String p) {
 		
 	}
-	
 	public String getNom() {
 		return nom;
 	}
@@ -34,8 +24,6 @@ public class Etudiant {
 	}
 	public void ajouter_note(double n, double c, int b) {
 		Evaluation a = new Evaluation(n, c, b);
-		control_continue.add(a);
+		list.add(a);
 	}
-	
->>>>>>> Stashed changes
 }
