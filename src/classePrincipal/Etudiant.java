@@ -8,7 +8,9 @@ public class Etudiant {
 	private ArrayList<Evaluation> list;
 	
 	public Etudiant(String n, String p) {
-		
+		nom = n;
+		prenom = p;
+		list = new ArrayList<>();
 	}
 	public String getNom() {
 		return nom;
@@ -23,7 +25,14 @@ public class Etudiant {
 		this.prenom = prenom;
 	}
 	public void ajouter_note(double n, double c, int b) {
-		Evaluation a = new Evaluation(n, c, b);
-		list.add(a);
+		Evaluation eva = new Evaluation(n, c, b);
+		list.add(eva);
+	}
+	public void afficher() {
+		String notes = null;
+		for(Evaluation a : list) {
+			notes = a.getNote() + "  " + a.getCoeff() + "  " + a.getBonus();
+		}
+		System.out.printf("%-20s %-30s %-9s\n", nom, prenom, notes);
 	}
 }
