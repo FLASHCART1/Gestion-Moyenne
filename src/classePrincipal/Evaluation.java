@@ -4,13 +4,15 @@ public class Evaluation {
 	private double note;
 	private double coeff;
 	private int bonus;
-	
+
+	//Constructeur
 	public Evaluation(double n, double c, int b) {
 		note = n;
 		coeff = c;
 		bonus = b;
 	}
 	
+	//getters-setters
 	public double getNote() {
 		return note;
 	}

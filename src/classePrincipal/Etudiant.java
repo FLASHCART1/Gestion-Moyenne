@@ -7,11 +7,14 @@ public class Etudiant {
 	private String prenom;
 	private ArrayList<Evaluation> list;
 	
+	//Constructeur
 	public Etudiant(String n, String p) {
 		nom = n;
 		prenom = p;
 		list = new ArrayList<>();
 	}
+	
+	//getters-setters
 	public String getNom() {
 		return nom;
 	}
@@ -24,6 +27,8 @@ public class Etudiant {
 	public void setPrenom(String prenom) {
 		this.prenom = prenom;
 	}
+	
+	//methods
 	public void ajouter_note(double n, double c, int b) {
 		Evaluation eva = new Evaluation(n, c, b);
 		list.add(eva);
