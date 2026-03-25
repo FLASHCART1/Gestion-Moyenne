@@ -5,9 +5,9 @@ import java.util.Scanner;
 
 public class Main {
 	public static void mainMenu() {
-		System.out.println("╔══════════════════════════════════╗");
-		System.out.println("║   GESTION DE MOYENNE EN JAVA     ║");
-		System.out.println("╚══════════════════════════════════╝");
+		System.out.println("╔══════════════════════════════╗");
+		System.out.println("║  GESTION DE MOYENNE EN JAVA  ║");
+		System.out.println("╚══════════════════════════════╝");
 		System.out.println("1. Charger une classe");
 		System.out.println("2. Créer une classe");
 		System.out.println("3. Supprimer une classe");
