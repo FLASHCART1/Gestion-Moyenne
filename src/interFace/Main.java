@@ -4,6 +4,7 @@ import classePrincipal.*;
 import java.util.Scanner;
 
 public class Main {
+	private MainClass classes;
 	public static void mainMenu() {
 		System.out.println("╔══════════════════════════════╗");
 		System.out.println("║  GESTION DE MOYENNE EN JAVA  ║");

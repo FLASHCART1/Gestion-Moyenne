@@ -7,7 +7,7 @@ public class Classe {
 	private ArrayList<Etudiant> list_classe;
 	
 	//contructeur
-	Classe(String n){
+	public Classe(String n){
 		setNom(n);
 		list_classe = new ArrayList<>();
 	}
@@ -22,6 +22,18 @@ public class Classe {
 	}
 	
 	//methods
+	public int get_index(String nom) {
+		int index = 0;
+		for(Etudiant e : list_classe) {
+			if(e.getNom() == nom) {
+				break;
+			}
+			else {
+				index++;
+			}
+		}
+		return index;
+	}
 	public void ajouter_Etu(String n, String p) {
 		Etudiant e = new Etudiant(n, p);
 		list_classe.add(e);
