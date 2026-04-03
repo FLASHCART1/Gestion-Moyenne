@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 public class Etudiant {
 	private String nom;
+	private String matricule;
 	private String prenom;
 	private ArrayList<Evaluation> list;
 	
@@ -28,6 +29,14 @@ public class Etudiant {
 		this.prenom = prenom;
 	}
 	
+	public String getMatricule() {
+		return matricule;
+	}
+
+	public void setMatricule(String matricule) {
+		this.matricule = matricule;
+	}
+
 	//methods
 	public void ajouter_note(double n, double c, int b) {
 		Evaluation eva = new Evaluation(n, c, b);

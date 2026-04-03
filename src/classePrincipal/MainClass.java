@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 public class MainClass {
 	private ArrayList<Classe> list;
+	
+	public MainClass() {
+		list = new ArrayList<>();
+	}
+	
 	public void creerClasse(String nom_classe) {
 		Classe a = new Classe(nom_classe);
 		list.add(a);
@@ -26,7 +31,8 @@ public class MainClass {
 		}
 		return index;
 	}
-	public void supprrimer(int index) {
+	public void supprrimer(String nom_classe) {
+		int index = get_index(nom_classe);
 		list.remove(index);
 	}
 
