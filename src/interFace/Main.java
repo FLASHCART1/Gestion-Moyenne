@@ -17,7 +17,7 @@ public class Main {
 		System.out.print("→  Votre choix:");
 	}
 	public static void main(String[] arg) {
-		MainClass app = new MainClass();
+		GestionnaireClasse app = new GestionnaireClasse();
 		@SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
 		int choix;

@@ -2,38 +2,34 @@ package classePrincipal;
 
 import java.util.ArrayList;
 
-public class MainClass {
-	private ArrayList<Classe> list;
+public class GestionnaireClasse {
+	private ArrayList<Classe> classes;
 	
-	public MainClass() {
-		list = new ArrayList<>();
+	public GestionnaireClasse() {
+		classes = new ArrayList<>();
 	}
 	
 	public void creerClasse(String nom_classe) {
 		Classe a = new Classe(nom_classe);
-		list.add(a);
+		classes.add(a);
 	}
 	public void afficher() {
 		System.out.println("CLASSES:");
-		for(Classe c : list) {
+		for(Classe c : classes) {
 			System.out.println("	"+c.getNom());
 		}
 	}
 	public int get_index(String nom_classe) {
-		int index = 0;
-		for(Classe c : list) {
-			if(c.getNom() == nom_classe) {
-				break;
-			}
-			else {
-				index++;
+		for(int i = 0; i < classes.size(); i++) {
+			if(classes.get(i).getNom().equals(nom_classe)) {
+				return i;
 			}
 		}
-		return index;
+		return -1;
 	}
 	public void supprrimer(String nom_classe) {
 		int index = get_index(nom_classe);
-		list.remove(index);
+		classes.remove(index);
 	}
 
 }

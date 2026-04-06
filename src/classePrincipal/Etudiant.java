@@ -4,14 +4,15 @@ import java.util.ArrayList;
 
 public class Etudiant {
 	private String nom;
-	private String matricule;
 	private String prenom;
+	private String matricule;
 	private ArrayList<Evaluation> list;
 	
 	//Constructeur
-	public Etudiant(String n, String p) {
+	public Etudiant(String n, String p, String m) {
 		nom = n;
 		prenom = p;
+		matricule = m;
 		list = new ArrayList<>();
 	}
 	
@@ -38,15 +39,14 @@ public class Etudiant {
 	}
 
 	//methods
-	public void ajouter_note(double n, double c, int b) {
-		Evaluation eva = new Evaluation(n, c, b);
-		list.add(eva);
+	public void ajouter_note(String nom, double n, double c, double b) {
+		if((n >= 0 || n <= 20 ) && (c > 0)) { list.add(new Evaluation(nom, n, c, b)); }
 	}
 	public void afficher() {
 		String notes = null;
 		for(Evaluation a : list) {
 			notes = a.getNote() + "  " + a.getCoeff() + "  " + a.getBonus();
 		}
-		System.out.printf("%-20s %-30s %-9s\n", nom, prenom, notes);
+		System.out.printf("%-20s %-20s %-30s %-9s\n",matricule, nom, prenom, notes);
 	}
 }
