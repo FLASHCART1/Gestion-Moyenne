@@ -29,7 +29,7 @@ public class Main {
 			switch(choix) {
 				case 1: {
 					app.afficher();
-					
+					app.creerClasse(null);
 				}
 			}
 		}while (choix != 6);
