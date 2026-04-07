@@ -1,27 +1,28 @@
-package classePrincipal;
+package gestionmoyenne.service;
 
 import java.util.ArrayList;
+import gestionmoyenne.model.Cours;
 
 public class GestionnaireClasse {
-	private ArrayList<Classe> classes;
+	private ArrayList<Cours> cours;
 	
 	public GestionnaireClasse() {
-		classes = new ArrayList<>();
+		cours = new ArrayList<>();
 	}
 	
 	public void creerClasse(String nom_classe) {
-		Classe a = new Classe(nom_classe);
-		classes.add(a);
+		Cours a = new Cours(nom_classe);
+		cours.add(a);
 	}
 	public void afficher() {
 		System.out.println("CLASSES:");
-		for(Classe c : classes) {
+		for(Cours c : cours) {
 			System.out.println("	"+c.getNom());
 		}
 	}
 	public int get_index(String nom_classe) {
-		for(int i = 0; i < classes.size(); i++) {
-			if(classes.get(i).getNom().equals(nom_classe)) {
+		for(int i = 0; i < cours.size(); i++) {
+			if(cours.get(i).getNom().equals(nom_classe)) {
 				return i;
 			}
 		}
@@ -29,7 +30,7 @@ public class GestionnaireClasse {
 	}
 	public void supprrimer(String nom_classe) {
 		int index = get_index(nom_classe);
-		classes.remove(index);
+		cours.remove(index);
 	}
 
 }

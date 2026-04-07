@@ -1,4 +1,4 @@
-package classePrincipal;
+package gestionmoyenne.model;
 
 public class Evaluation {
 	private String nom;

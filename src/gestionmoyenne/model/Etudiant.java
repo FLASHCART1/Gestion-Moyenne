@@ -1,4 +1,4 @@
-package classePrincipal;
+package gestionmoyenne.model;
 
 import java.util.ArrayList;
 

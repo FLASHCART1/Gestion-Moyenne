@@ -1,13 +1,13 @@
-package classePrincipal;
+package gestionmoyenne.model;
 
 import java.util.ArrayList;
 
-public class Classe {
+public class Cours {
 	private String nom;
 	private ArrayList<Etudiant> etudiants;
 	
 	//contructeur
-	public Classe(String n){
+	public Cours(String n){
 		setNom(n);
 		etudiants = new ArrayList<>();
 	}

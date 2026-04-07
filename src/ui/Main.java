@@ -1,7 +1,9 @@
-package interFace;
+package ui;
 
-import classePrincipal.*;
 import java.util.Scanner;
+
+import gestionmoyenne.*;
+import gestionmoyenne.service.GestionnaireClasse;
 
 public class Main {
 	public static void mainMenu() {
