@@ -13,10 +13,10 @@ public class InterfaceNotes extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // 1. Définition des colonnes
-        String[] colonnes = {"Nom de l'Étudiant", "Note 1", "Note 2", "Bonus/Malus", "Moyenne"};
+        // 1. Dï¿½finition des colonnes
+        String[] colonnes = {"Nom de l'Ã©tudiant", "Note 1", "Note 2", "Bonus/Malus", "Moyenne"};
 
-        // 2. Création du Modèle (Gestion des droits d'édition)
+        // 2. Crï¿½ation du Modï¿½le (Gestion des droits d'ï¿½dition)
         model = new DefaultTableModel(colonnes, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -28,15 +28,15 @@ public class InterfaceNotes extends JFrame {
         table = new JTable(model);
 
         // 3. Boutons d'action
-        JButton btnAjouter = new JButton("Ajouter Étudiant");
+        JButton btnAjouter = new JButton("Ajouter Ã©tudiant");
         JButton btnCalculer = new JButton("Calculer Moyennes");
         JButton btnVider = new JButton("Vider la liste");
 
         // --- LOGIQUE DU BOUTON AJOUTER ---
         btnAjouter.addActionListener(e -> {
-            String nom = JOptionPane.showInputDialog(this, "Nom de l'étudiant :");
+            String nom = JOptionPane.showInputDialog(this, "Nom de l'Ã©tudiant :");
             if (nom != null && !nom.isEmpty()) {
-                // On ajoute l'étudiant avec des notes à 0 par défaut
+                // On ajoute l'Ã©tudiant avec des notes Ã  0 par defaut
                 model.addRow(new Object[]{nom, "0", "0", "0", "---"});
             }
         });
@@ -54,7 +54,7 @@ public class InterfaceNotes extends JFrame {
         add(panelBas, BorderLayout.SOUTH);
     }
 
-    // Méthode simple pour calculer la moyenne de chaque ligne
+    // Mï¿½thode simple pour calculer la moyenne de chaque ligne
     private void calculerTout() {
         for (int i = 0; i < model.getRowCount(); i++) {
             try {
@@ -63,9 +63,9 @@ public class InterfaceNotes extends JFrame {
                 double bonus = Double.parseDouble(model.getValueAt(i, 3).toString());
 
                 double moyenne = (n1 + n2) / 2 + bonus;
-                model.setValueAt(moyenne, i, 4); // On écrit dans la colonne "Moyenne"
+                model.setValueAt(moyenne, i, 4); // On Ã©crit dans la colonne "Moyenne"
             } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erreur de saisie à la ligne " + (i+1));
+                JOptionPane.showMessageDialog(this, "Erreur de saisie Ã  la ligne " + (i+1));
             }
         }
     }
