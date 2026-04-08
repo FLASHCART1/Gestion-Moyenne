@@ -1,15 +1,19 @@
 package gestionmoyenne.impor;
 
-import gestionmoyenne.model.Etudiant;
-import org.apache.poi.ss.usermodel.*;
-import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 
+import org.apache.poi.ss.usermodel.*;
+import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import com.sun.rowset.internal.Row;
+
+import gestionmoyenne.model.Etudiant;
+
 public class ExcelReader {
     
-/*    public ArrayList<Etudiant> lireEtudiants(String cheminFichier) throws Exception {
+    public ArrayList<Etudiant> lireEtudiants(String cheminFichier) throws Exception {
         ArrayList<Etudiant> liste = new ArrayList<>();
         FileInputStream fis = new FileInputStream(new File(cheminFichier));
         Workbook workbook = new XSSFWorkbook(fis);
@@ -30,7 +34,7 @@ public class ExcelReader {
         fis.close();
         return liste;
     }
-*/    
+  
     private String getCellString(Cell cell) {
         if (cell == null) return "";
         switch (cell.getCellType()) {
