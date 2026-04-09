@@ -13,13 +13,9 @@ public class Classe {
 	}
 	
 	//getter-setter
-	public String getNom() {
-		return nom;
-	}
-
-	public void setNom(String nom) {
-		this.nom = nom;
-	}
+	public String getNom() { return nom; }
+	public ArrayList<Cours> getModules() { return modules; }
+	public void setNom(String nom) { this.nom = nom; }
 	
 	//methods
 	public int get_index(String nom) {
