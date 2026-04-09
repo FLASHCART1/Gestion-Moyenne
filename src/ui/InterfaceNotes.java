@@ -72,7 +72,7 @@ public class InterfaceNotes extends JFrame {
     }
 
     public static void main(String[] args) {
-        // Lancement de l'interface
+        // Lancement de l'interface graphique
         SwingUtilities.invokeLater(() -> new InterfaceNotes().setVisible(true));
     }
 }

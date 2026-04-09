@@ -31,8 +31,8 @@ public class Classe {
 		}
 		return -1;
 	}
-	public void ajouter_cours(String n) {
-		modules.add(new Cours(n));
+	public void ajouter_cours(String nom, int volumeHoraire) {
+		modules.add(new Cours(nom, volumeHoraire));
 	}
 	public void supprimer_cours(String nomCours) {
         int index = get_index(nomCours);
