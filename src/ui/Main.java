@@ -2,7 +2,6 @@ package ui;
 
 import java.util.Scanner;
 
-import gestionmoyenne.*;
 import gestionmoyenne.service.GestionnaireClasse;
 
 public class Main {
