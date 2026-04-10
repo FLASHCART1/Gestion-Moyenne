@@ -1,10 +1,17 @@
 package gestionmoyenne.service;
 
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.util.ArrayList;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import gestionmoyenne.model.Classe;
-import java.io.*;
-import java.util.ArrayList;
 
 public class DataStore {
     private static final String DOSSIER_DATA = "data";
