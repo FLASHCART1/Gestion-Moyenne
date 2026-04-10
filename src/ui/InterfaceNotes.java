@@ -14,10 +14,10 @@ public class InterfaceNotes extends JFrame {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
 
-        // 1. D�finition des colonnes
+        // 1. Definition des colonnes
         String[] colonnes = {"Nom de l'étudiant", "Note 1", "Note 2", "Bonus/Malus", "Moyenne"};
 
-        // 2. Cr�ation du Mod�le (Gestion des droits d'�dition)
+        // 2. Creation du Modele (Gestion des droits d'ddition)
         model = new DefaultTableModel(colonnes, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -33,7 +33,7 @@ public class InterfaceNotes extends JFrame {
         JButton btnCalculer = new JButton("Calculer Moyennes");
         JButton btnVider = new JButton("Vider la liste");
 
-        // --- LOGIQUE DU BOUTON AJOUTER ---
+        //  LOGIQUE DU BOUTON AJOUTER
         btnAjouter.addActionListener(e -> {
             String nom = JOptionPane.showInputDialog(this, "Nom de l'étudiant :");
             if (nom != null && !nom.isEmpty()) {
@@ -42,7 +42,7 @@ public class InterfaceNotes extends JFrame {
             }
         });
 
-        // --- LOGIQUE DU BOUTON CALCULER ---
+        // LOGIQUE DU BOUTON CALCULER
         btnCalculer.addActionListener(e -> calculerTout());
 
         // 4. Mise en page (Layout)
@@ -55,7 +55,7 @@ public class InterfaceNotes extends JFrame {
         add(panelBas, BorderLayout.SOUTH);
     }
 
-    // M�thode simple pour calculer la moyenne de chaque ligne
+    // Mathode simple pour calculer la moyenne de chaque ligne
     private void calculerTout() {
         for (int i = 0; i < model.getRowCount(); i++) {
             try {
@@ -63,7 +63,7 @@ public class InterfaceNotes extends JFrame {
                 double n2 = Double.parseDouble(model.getValueAt(i, 2).toString());
                 double bonus = Double.parseDouble(model.getValueAt(i, 3).toString());
 
-                double moyenne = (n1 + n2) / 2 + bonus;
+                double moyenne = ((n1+bonus) + (n2+bonus)) / 2 + bonus;
                 model.setValueAt(moyenne, i, 4); // On écrit dans la colonne "Moyenne"
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erreur de saisie à la ligne " + (i+1));
