@@ -14,7 +14,7 @@ public class InterfaceGraphique2 extends JFrame {
     public InterfaceGraphique2() {
 
         setTitle("Gestion Notes");
-        setSize(1280, 720);
+        setSize(1280, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         ges = new GestionnaireClasse();
@@ -41,11 +41,19 @@ public class InterfaceGraphique2 extends JFrame {
 
         // Ajouter étudiant
         add.addActionListener(e -> {
-            String nom = JOptionPane.showInputDialog("Nom");
-
-            ges.creerClasse(nom);
-
-            model.addRow(new Object[]{nom, 0, 0, 0, 0});
+            String nom = JOptionPane.showInputDialog("Nom de la classe");
+            int confirmation = JOptionPane.showConfirmDialog(this,
+                    "Voulez-vous vraiment supprimer la classe \"" + nom + "\" ?",
+                    "Confirmation de suppression",
+                    JOptionPane.YES_NO_OPTION,
+                    JOptionPane.WARNING_MESSAGE);
+                    
+                if (confirmation == JOptionPane.YES_OPTION) {
+                    // Supprimer d'abord dans le gestionnaire
+            	ges.creerClasse(nom);
+            	model.addRow(new Object[]{nom, 0, 0, 0, 0});
+        }
+            
         });
 
         // Supprimer la classe sélectionnée dans le tableau
