@@ -3,20 +3,27 @@ package gestionmoyenne.model;
 import java.util.ArrayList;
 
 public class Etudiant {
+	private static int compteur = 0;
+	private final int id;
+	
 	private String nom;
 	private String prenom;
 	private String matricule;
 	private ArrayList<Evaluation> evaluations;
 	
-	//Constructeur
 	public Etudiant(String n, String p, String m) {
+		this.id = ++compteur;
 		nom = n;
 		prenom = p;
 		matricule = m;
 		evaluations = new ArrayList<>();
 	}
 	
-	//getters-setters
+	public static int getCompteur() { return compteur; }
+	public static void resetCompteur() { compteur = 0; }
+	public int getId() { return id; }
+	
+	// ... méthodes existantes ...
 	public String getNom() { return nom; }
 	public String getPrenom() { return prenom; }
 	public String getMatricule() { return matricule; }
@@ -25,14 +32,17 @@ public class Etudiant {
 	public void setPrenom(String prenom) { this.prenom = prenom; }
 	public void setMatricule(String matricule) { this.matricule = matricule; }
 
-	//methods
 	public void ajouter_note(String nom, double note, double coeff, double bonus) {
-		if(note >= 0 && note <= 20 && coeff > 0) { evaluations.add(new Evaluation(nom, note, coeff, bonus)); }
+		if(note >= 0 && note <= 20 && coeff > 0) { 
+			evaluations.add(new Evaluation(nom, note, coeff, bonus)); 
+		}
 		else { System.out.println("Erreur: Note entre 0-20 et coeff > 0 requis"); }
 	}
+	
 	public boolean peutCalculerMoyenne() {
         return evaluations.size() >= 2;
     }
+	
 	public double calculerMoyenne() {
         if(evaluations.size() < 2) return -1;
         
@@ -72,6 +82,7 @@ public class Etudiant {
             System.out.println("Index invalide");
         }
     }
+    
     public void afficher() {
         StringBuilder notesStr = new StringBuilder();
         for(Evaluation ev : evaluations) {
@@ -89,7 +100,7 @@ public class Etudiant {
         double moy = calculerMoyenne();
         String moyStr = (moy >= 0) ? String.format("%.2f/20", moy) : "N/A (min 2 notes)";
         
-        System.out.printf("%-10s %-15s %-15s %-30s [%-10s]\n", 
-            matricule, nom, prenom, notesStr.toString(), moyStr);
+        System.out.printf("#%-3d %-10s %-15s %-15s %-30s [%-10s]\n", 
+            id, matricule, nom, prenom, notesStr.toString(), moyStr);
     }
 }

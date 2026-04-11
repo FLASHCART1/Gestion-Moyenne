@@ -4,16 +4,16 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import gestionmoyenne.model.*;
 
-public class interfaceGraphique extends JFrame {
+public class InterfaceGraphique extends JFrame {
 
     JTable table;
     DefaultTableModel model;
     Cours cours;
 
-    public interfaceGraphique() {
+    public InterfaceGraphique() {
 
         setTitle("Gestion Notes");
-        setSize(600, 400);
+        setSize(1280, 720);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         cours = new Cours("Java", 30);
@@ -67,6 +67,6 @@ public class interfaceGraphique extends JFrame {
     }
 
     public static void main(String[] args) {
-        new interfaceGraphique().setVisible(true);
+        new InterfaceGraphique().setVisible(true);
     }
 }

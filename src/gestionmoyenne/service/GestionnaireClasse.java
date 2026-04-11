@@ -1,7 +1,7 @@
 package gestionmoyenne.service;
 
 import java.util.ArrayList;
-import gestionmoyenne.model.Classe;
+import gestionmoyenne.model.*;
 
 public class GestionnaireClasse {
     private ArrayList<Classe> classes;
@@ -23,7 +23,7 @@ public class GestionnaireClasse {
         Classe a = new Classe(nom_classe);
         classes.add(a);
         sauvegarder();
-        System.out.println("✅ Classe créée: " + nom_classe);
+        System.out.println("Classe créée: " + nom_classe);
     }
     
     public void afficher() {
@@ -68,6 +68,9 @@ public class GestionnaireClasse {
     
     public void sauvegarder() {
         dataStore.sauvegarder(classes);
+    }
+    public void charger() {
+    	dataStore.charger();
     }
     
     public ArrayList<Classe> getClasses() { return classes; }

@@ -3,13 +3,16 @@ package gestionmoyenne.model;
 import java.util.ArrayList;
 
 public class Cours {
+	private static int compteur = 0;
+	private final int id;
+	
 	private String nom;
 	private int volumeHoraire;
 	private ArrayList<Etudiant> etudiants;
 	private ArrayList<Evaluation> modelesEvaluations;
 	
-	//contructeur
 	public Cours(String n, int volumeHoraire){
+		this.id = ++compteur;
 		setNom(n);
 		this.volumeHoraire = volumeHoraire;
 		etudiants = new ArrayList<>();
@@ -19,14 +22,16 @@ public class Cours {
         ajouterTypeEvaluation("Evaluation 2", 1.0);
 	}
 	
-	//getter-setter
+	public static int getCompteur() { return compteur; }
+	public static void resetCompteur() { compteur = 0; }
+	public int getId() { return id; }
+	
 	public String getNom() { return nom; }
 	public void setNom(String nom) { this.nom = nom; }
 	public int getVolumeHoraire() { return volumeHoraire; }
 	public ArrayList<Etudiant> getEtudiants() { return etudiants; }
 	public ArrayList<Evaluation> getModelesEvaluations() { return modelesEvaluations; }
 	
-	//methods
 	public int get_index(String matricule) {
 		for(int i = 0; i < etudiants.size(); i++) {
 			if(etudiants.get(i).getMatricule().equals(matricule)) {
@@ -35,12 +40,14 @@ public class Cours {
 		}
 		return -1;
 	}
+	
 	public void ajouterTypeEvaluation(String nomEval, double coef) {
         modelesEvaluations.add(new Evaluation(nomEval, 0, coef, 0));
         for(Etudiant e : etudiants) {
             e.ajouter_note(nomEval, 0, coef, 0);
         }
     }
+	
 	public void ajouter_Etu(String nom, String prenom, String matricule) {
         Etudiant e = new Etudiant(nom, prenom, matricule);
         for(Evaluation ev : modelesEvaluations) {
@@ -48,8 +55,8 @@ public class Cours {
         }
         etudiants.add(e);
     }
+	
 	public void ajouter_Etu_Existant(Etudiant e) {
-        // Compléter avec les évaluations manquantes si besoin
         int nbEvalsManquantes = modelesEvaluations.size() - e.getEvaluations().size();
         for(int i = e.getEvaluations().size(); i < modelesEvaluations.size(); i++) {
             Evaluation modele = modelesEvaluations.get(i);
@@ -59,18 +66,20 @@ public class Cours {
     }
 
 	public void retirer_Etu(String matricule) {
-		int index = get_index(matricule);if (index != -1) {
+		int index = get_index(matricule);
+		if (index != -1) {
             etudiants.remove(index);
             System.out.println("Étudiant retiré");
         } else {
             System.out.println("Matricule non trouvé");
         }
     }
+	
 	public void afficher() {
-        System.out.println("\n Cours: " + nom + " (" + volumeHoraire + "h)");
+        System.out.println("\n Cours #" + id + ": " + nom + " (" + volumeHoraire + "h)");
         System.out.println("Évaluations: " + modelesEvaluations.size() + " types");
-        System.out.println("Étudiants (" + etudiants.size() + "):");
-        System.out.printf("%-10s %-15s %-15s %-30s %s\n", "MATRICULE", "NOM", "PRENOM", "NOTES", "MOYENNE");
+        System.out.println("Étudiants inscrits: " + etudiants.size());
+        System.out.printf("%-5s %-10s %-15s %-15s %-30s %s\n", "ID", "MATRICULE", "NOM", "PRENOM", "NOTES", "MOYENNE");
         for(Etudiant e : etudiants) {
             e.afficher();
         }
