@@ -1,7 +1,12 @@
 [
   {
     "id": 1,
-    "nom": "sanata",
+    "nom": "aze",
+    "modules": []
+  },
+  {
+    "id": 2,
+    "nom": "azerty",
     "modules": []
   }
 ]

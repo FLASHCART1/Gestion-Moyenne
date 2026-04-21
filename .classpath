@@ -1,9 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry kind="lib" path="C:/Users/PAVILION HP/OneDrive/Pictures/Documents/GitHub/Gestion-Moyenne/bin/com.google.gson_2.12.1.jar"/>
-	<classpathentry kind="lib" path="C:/Users/PAVILION HP/OneDrive/Pictures/Documents/GitHub/Gestion-Moyenne/bin/org.apache.poi.ooxml_4.1.1.v20221112-0806.jar"/>
-	<classpathentry kind="lib" path="C:/Users/PAVILION HP/OneDrive/Pictures/Documents/GitHub/Gestion-Moyenne/bin/org.apache.poi_4.1.1.v20221112-0806.jar"/>
-	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER">
+		<attributes>
+			<attribute name="module" value="true"/>
+		</attributes>
+	</classpathentry>
+	<classpathentry kind="lib" path="src/com.google.gson_2.12.1.jar"/>
+	<classpathentry kind="lib" path="src/org.apache.poi_4.1.1.v20221112-0806.jar"/>
+	<classpathentry kind="lib" path="src/org.apache.poi.ooxml_4.1.1.v20221112-0806.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
