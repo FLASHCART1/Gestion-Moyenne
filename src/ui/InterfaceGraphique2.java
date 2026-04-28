@@ -10,7 +10,7 @@ public class InterfaceGraphique2 extends JFrame {
     JTable table;
     DefaultTableModel model;
     GestionnaireClasse ges;
-    private Classe selectedClasse;
+    Classe selectedClasse;
 
     public Classe getSelectedClasse() {
 		return selectedClasse;
@@ -76,6 +76,7 @@ public class InterfaceGraphique2 extends JFrame {
             //JOptionPane.showMessageDialog(this, "Ouverture de : " + nomClasse);
             selectedClasse = ges.selectedClasse(selectedRow);
             InterfaceGraphique3 classes = new InterfaceGraphique3();
+            classes.selectedClasse = ges.selectedClasse(selectedRow);
             classes.setTitle(nomClasse);
             classes.setVisible(true);
         });

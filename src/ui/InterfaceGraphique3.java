@@ -23,7 +23,7 @@ public class InterfaceGraphique3 extends InterfaceGraphique2 {
         model = new DefaultTableModel(col, 0);
 
         // Charger les classes sauvegardées
-        for (Cours c : ges.getCours(getSelectedClasse())) {
+        for (Cours c : selectedClasse.getModules()) {
             model.addRow(new Object[]{c.getNom()});
         }
 
