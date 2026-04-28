@@ -2,37 +2,28 @@ package ui;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+
+import com.sun.jdi.connect.Connector.SelectedArgument;
+
 import gestionmoyenne.model.*;
 import gestionmoyenne.service.*;
 
-public class InterfaceGraphique2 extends JFrame {
+public class InterfaceGraphique3 extends InterfaceGraphique2 {
 
     JTable table;
     DefaultTableModel model;
-    GestionnaireClasse ges;
-    private Classe selectedClasse;
 
-    public Classe getSelectedClasse() {
-		return selectedClasse;
-	}
+    public InterfaceGraphique3() {
 
-	public void setSelectedClasse(Classe selectedclasse) {
-		this.selectedClasse = selectedclasse;
-	}
-
-	public InterfaceGraphique2() {
-
-        setTitle("Gestion Notes");
+        setTitle("");
         setSize(1280, 480);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        ges = new GestionnaireClasse();
-
-        String[] col = {"Classe"};
+        String[] col = {"Nom", "Modules"};
         model = new DefaultTableModel(col, 0);
 
         // Charger les classes sauvegardées
-        for (Classe c : ges.getClasses()) {
+        for (Cours c : ges.getCours(getSelectedClasse())) {
             model.addRow(new Object[]{c.getNom()});
         }
 
@@ -69,19 +60,14 @@ public class InterfaceGraphique2 extends JFrame {
         
         open.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
-            ges.selectedClasse(selectedRow);
             if (selectedRow == -1) return;
             
             String nomClasse = (String) model.getValueAt(selectedRow, 0);
-            //JOptionPane.showMessageDialog(this, "Ouverture de : " + nomClasse);
-            selectedClasse = ges.selectedClasse(selectedRow);
-            InterfaceGraphique3 classes = new InterfaceGraphique3();
-            classes.setTitle(nomClasse);
-            classes.setVisible(true);
+            JOptionPane.showMessageDialog(this, "Ouverture de : " + nomClasse);
         });
     }
 
     public static void main(String[] args) {
-        new InterfaceGraphique2().setVisible(true);
+        new InterfaceGraphique3().setVisible(true);
     }
 }

@@ -74,4 +74,10 @@ public class GestionnaireClasse {
     }
     
     public ArrayList<Classe> getClasses() { return classes; }
+    public Classe selectedClasse(int index) {
+    	return classes.get(index);
+    }
+    public ArrayList<Cours> getCours(Classe classe){
+    	return classe.getModules();
+    }
 }
