@@ -12,14 +12,6 @@ public class InterfaceGraphique2 extends JFrame {
     GestionnaireClasse ges;
     Classe selectedClasse;
 
-    public Classe getSelectedClasse() {
-		return selectedClasse;
-	}
-
-	public void setSelectedClasse(Classe selectedclasse) {
-		this.selectedClasse = selectedclasse;
-	}
-
 	public InterfaceGraphique2() {
 
         setTitle("Gestion Notes");
@@ -69,20 +61,24 @@ public class InterfaceGraphique2 extends JFrame {
         
         open.addActionListener(e -> {
             int selectedRow = table.getSelectedRow();
-            ges.selectedClasse(selectedRow);
-            if (selectedRow == -1) return;
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Sélectionnez une classe");
+                return;
+            }
             
-            String nomClasse = (String) model.getValueAt(selectedRow, 0);
-            //JOptionPane.showMessageDialog(this, "Ouverture de : " + nomClasse);
-            selectedClasse = ges.selectedClasse(selectedRow);
-            InterfaceGraphique3 classes = new InterfaceGraphique3();
-            classes.selectedClasse = ges.selectedClasse(selectedRow);
-            classes.setTitle(nomClasse);
-            classes.setVisible(true);
+            Classe classe = ges.selectedClasse(selectedRow);
+            if (classe == null) {
+                JOptionPane.showMessageDialog(this, "Classe introuvable");
+                return;
+            }
+            
+            // Passer les données au constructeur, pas après
+            InterfaceGraphique3 fenetreCours = new InterfaceGraphique3(ges, classe);
+            fenetreCours.setVisible(true);
         });
     }
 
     public static void main(String[] args) {
-        new InterfaceGraphique2().setVisible(true);
+    	new InterfaceGraphique2().setVisible(true);
     }
 }
