@@ -75,6 +75,7 @@ public class InterfaceGraphique2 extends JFrame {
             // Passer les données au constructeur, pas après
             InterfaceGraphique3 fenetreCours = new InterfaceGraphique3(ges, classe);
             fenetreCours.setVisible(true);
+            setVisible(false);
         });
     }
 

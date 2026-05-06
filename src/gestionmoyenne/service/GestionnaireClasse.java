@@ -1,6 +1,7 @@
 package gestionmoyenne.service;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import gestionmoyenne.model.*;
 
 public class GestionnaireClasse {
@@ -9,21 +10,23 @@ public class GestionnaireClasse {
     
     public GestionnaireClasse() {
         this.dataStore = new DataStore();
-        this.classes = dataStore.charger(); // Chargement auto au démarrage
+        this.classes = dataStore.charger();
         if(!classes.isEmpty()) {
             System.out.println("📂 " + classes.size() + " classe(s) chargée(s)");
         }
     }
     
     public void creerClasse(String nom_classe) {
+        if (nom_classe == null || nom_classe.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom de la classe est obligatoire");
+        }
         if(getClasse(nom_classe) != null) {
-            System.out.println("⚠️ Cette classe existe déjà");
-            return;
+            throw new IllegalStateException("Cette classe existe déjà: " + nom_classe);
         }
         Classe a = new Classe(nom_classe);
         classes.add(a);
         sauvegarder();
-        System.out.println("Classe créée: " + nom_classe);
+        System.out.println("✅ Classe créée: " + nom_classe);
     }
     
     public void afficher() {
@@ -33,7 +36,7 @@ public class GestionnaireClasse {
             return;
         }
         for(Classe c : classes) {
-            System.out.println("📚 " + c.getNom() + " - " + c.getModules() + " cours");
+            System.out.println("📚 " + c.getNom() + " - " + c.getModules().size() + " cours");
         }
     }
     
@@ -48,36 +51,67 @@ public class GestionnaireClasse {
     
     public int get_index(String nom_classe) {
         for(int i = 0; i < classes.size(); i++) {
-            if(classes.get(i).getNom().equals(nom_classe)) {
+            if(classes.get(i).getNom().equalsIgnoreCase(nom_classe)) {
                 return i;
             }
         }
         return -1;
     }
     
-    public void supprimer(String nom_classe) { // correction orthographe
+    public void supprimer(String nom_classe) {
         int index = get_index(nom_classe);
         if(index != -1) {
             classes.remove(index);
             sauvegarder();
             System.out.println("✅ Classe supprimée");
         } else {
-            System.out.println("❌ Classe non trouvée");
+            throw new IllegalArgumentException("Classe non trouvée: " + nom_classe);
         }
     }
     
     public void sauvegarder() {
         dataStore.sauvegarder(classes);
     }
-    public void charger() {
-    	dataStore.charger();
+    
+    /**
+     * Recharge les données depuis le disque (utile après modification externe)
+     */
+    public void recharger() {
+        this.classes = dataStore.charger();
+        System.out.println("🔄 Données rechargées");
     }
     
-    public ArrayList<Classe> getClasses() { return classes; }
-    public Classe selectedClasse(int index) {
-    	return classes.get(index);
+    public ArrayList<Classe> getClasses() { 
+        return new ArrayList<>(classes); // Copie défensive
     }
-    public ArrayList<Cours> getCours(Classe classe){
-    	return classe.getModules();
+    
+    public Classe selectedClasse(int index) {
+        if (index < 0 || index >= classes.size()) {
+            throw new IndexOutOfBoundsException("Index invalide: " + index);
+        }
+        return classes.get(index);
+    }
+    
+    public ArrayList<Cours> getCours(Classe classe) {
+        if (classe == null) {
+            throw new IllegalArgumentException("La classe ne peut pas être null");
+        }
+        return classe.getModules();
+    }
+    
+    /**
+     * Recherche un étudiant par matricule dans toutes les classes
+     */
+    public Etudiant trouverEtudiant(String matricule) {
+        for (Classe c : classes) {
+            for (Cours cr : c.getModules()) {
+                for (Etudiant e : cr.getEtudiants()) {
+                    if (e.getMatricule().equalsIgnoreCase(matricule)) {
+                        return e;
+                    }
+                }
+            }
+        }
+        return null;
     }
 }

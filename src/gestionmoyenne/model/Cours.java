@@ -1,87 +1,177 @@
 package gestionmoyenne.model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Objects;
 
 public class Cours {
-	private static int compteur = 0;
-	private final int id;
-	
-	private String nom;
-	private int volumeHoraire;
-	private ArrayList<Etudiant> etudiants;
-	private ArrayList<Evaluation> modelesEvaluations;
-	
-	public Cours(String n, int volumeHoraire){
-		this.id = ++compteur;
-		setNom(n);
-		this.volumeHoraire = volumeHoraire;
-		etudiants = new ArrayList<>();
-		modelesEvaluations = new ArrayList<>();
-		
-		ajouterTypeEvaluation("Evaluation 1", 1.0);
+    private static int compteur = 0;
+    private final int id;
+    
+    private String nom;
+    private int volumeHoraire;
+    private ArrayList<Etudiant> etudiants;
+    private ArrayList<Evaluation> modelesEvaluations;
+    
+    public Cours(String n, int volumeHoraire) {
+        if (n == null || n.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom du cours ne peut pas être vide");
+        }
+        if (volumeHoraire <= 0) {
+            throw new IllegalArgumentException("Le volume horaire doit être positif");
+        }
+        this.id = ++compteur;
+        this.nom = n.trim();
+        this.volumeHoraire = volumeHoraire;
+        this.etudiants = new ArrayList<>();
+        this.modelesEvaluations = new ArrayList<>();
+        
+        // 2 évaluations par défaut comme exigé
+        ajouterTypeEvaluation("Evaluation 1", 1.0);
         ajouterTypeEvaluation("Evaluation 2", 1.0);
-	}
-	
-	public static int getCompteur() { return compteur; }
-	public static void resetCompteur() { compteur = 0; }
-	public int getId() { return id; }
-	
-	public String getNom() { return nom; }
-	public void setNom(String nom) { this.nom = nom; }
-	public int getVolumeHoraire() { return volumeHoraire; }
-	public ArrayList<Etudiant> getEtudiants() { return etudiants; }
-	public ArrayList<Evaluation> getModelesEvaluations() { return modelesEvaluations; }
-	
-	public int get_index(String matricule) {
-		for(int i = 0; i < etudiants.size(); i++) {
-			if(etudiants.get(i).getMatricule().equals(matricule)) {
-				return i;
-			}
-		}
-		return -1;
-	}
-	
-	public void ajouterTypeEvaluation(String nomEval, double coef) {
+    }
+    
+    // Package-private pour désérialisation
+    Cours() {
+        this.id = 0;
+        this.nom = "";
+        this.etudiants = new ArrayList<>();
+        this.modelesEvaluations = new ArrayList<>();
+    }
+    
+    public static void synchroniserCompteur(int maxId) {
+        if (maxId > compteur) {
+            compteur = maxId;
+        }
+    }
+    
+    public static int getCompteur() { return compteur; }
+    
+    public int getId() { return id; }
+    public String getNom() { return nom; }
+    public void setNom(String nom) { 
+        if (nom == null || nom.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom ne peut pas être vide");
+        }
+        this.nom = nom.trim(); 
+    }
+    public int getVolumeHoraire() { return volumeHoraire; }
+    public void setVolumeHoraire(int volumeHoraire) {
+        if (volumeHoraire <= 0) {
+            throw new IllegalArgumentException("Volume horaire doit être positif");
+        }
+        this.volumeHoraire = volumeHoraire;
+    }
+    
+    // Copie défensive pour éviter modification externe
+    public ArrayList<Etudiant> getEtudiants() { 
+        return new ArrayList<>(etudiants); 
+    }
+    public ArrayList<Evaluation> getModelesEvaluations() { 
+        return new ArrayList<>(modelesEvaluations); 
+    }
+    
+    // Accès interne uniquement
+    ArrayList<Etudiant> getEtudiantsInterne() { return etudiants; }
+    ArrayList<Evaluation> getModelesEvaluationsInterne() { return modelesEvaluations; }
+    
+    public int get_index(String matricule) {
+        for(int i = 0; i < etudiants.size(); i++) {
+            if(etudiants.get(i).getMatricule().equalsIgnoreCase(matricule)) {
+                return i;
+            }
+        }
+        return -1;
+    }
+    
+    public boolean existeEtudiant(String matricule) {
+        return get_index(matricule) != -1;
+    }
+    
+    public void ajouterTypeEvaluation(String nomEval, double coef) {
+        if (nomEval == null || nomEval.trim().isEmpty()) {
+            throw new IllegalArgumentException("Le nom de l'évaluation ne peut pas être vide");
+        }
+        if (coef <= 0) {
+            throw new IllegalArgumentException("Le coefficient doit être strictement positif");
+        }
+        // Vérifier doublon
+        for (Evaluation ev : modelesEvaluations) {
+            if (ev.getNom().equalsIgnoreCase(nomEval)) {
+                throw new IllegalStateException("Une évaluation avec ce nom existe déjà");
+            }
+        }
+        
         modelesEvaluations.add(new Evaluation(nomEval, 0, coef, 0));
         for(Etudiant e : etudiants) {
             e.ajouter_note(nomEval, 0, coef, 0);
         }
     }
-	
-	public void ajouter_Etu(String nom, String prenom, String matricule) {
+    
+    public void ajouter_Etu(String nom, String prenom, String matricule) {
+        if (existeEtudiant(matricule)) {
+            throw new IllegalStateException("Un étudiant avec ce matricule existe déjà: " + matricule);
+        }
         Etudiant e = new Etudiant(nom, prenom, matricule);
         for(Evaluation ev : modelesEvaluations) {
             e.ajouter_note(ev.getNom(), 0, ev.getCoeff(), 0);
         }
         etudiants.add(e);
     }
-	
-	public void ajouter_Etu_Existant(Etudiant e) {
-        int nbEvalsManquantes = modelesEvaluations.size() - e.getEvaluations().size();
-        for(int i = e.getEvaluations().size(); i < modelesEvaluations.size(); i++) {
-            Evaluation modele = modelesEvaluations.get(i);
-            e.ajouter_note(modele.getNom(), 0, modele.getCoeff(), 0);
+    
+    public void ajouter_Etu_Existant(Etudiant e) {
+        if (e == null) {
+            throw new IllegalArgumentException("L'étudiant ne peut pas être null");
+        }
+        if (existeEtudiant(e.getMatricule())) {
+            throw new IllegalStateException("Matricule déjà existant: " + e.getMatricule());
+        }
+        // Synchroniser les évaluations manquantes
+        for(Evaluation modele : modelesEvaluations) {
+            boolean possede = false;
+            for (Evaluation evEtu : e.getEvaluations()) {
+                if (evEtu.getNom().equalsIgnoreCase(modele.getNom())) {
+                    possede = true;
+                    break;
+                }
+            }
+            if (!possede) {
+                e.ajouter_note(modele.getNom(), 0, modele.getCoeff(), 0);
+            }
         }
         etudiants.add(e);
     }
-
-	public void retirer_Etu(String matricule) {
-		int index = get_index(matricule);
-		if (index != -1) {
+    
+    public void retirer_Etu(String matricule) {
+        int index = get_index(matricule);
+        if (index != -1) {
             etudiants.remove(index);
-            System.out.println("Étudiant retiré");
         } else {
-            System.out.println("Matricule non trouvé");
+            throw new IllegalArgumentException("Matricule non trouvé: " + matricule);
         }
     }
-	
-	public void afficher() {
+    
+    public void afficher() {
         System.out.println("\n Cours #" + id + ": " + nom + " (" + volumeHoraire + "h)");
         System.out.println("Évaluations: " + modelesEvaluations.size() + " types");
         System.out.println("Étudiants inscrits: " + etudiants.size());
-        System.out.printf("%-5s %-10s %-15s %-15s %-30s %s\n", "ID", "MATRICULE", "NOM", "PRENOM", "NOTES", "MOYENNE");
+        System.out.printf("%-5s %-12s %-15s %-15s %-35s %s\n", 
+            "ID", "MATRICULE", "NOM", "PRENOM", "NOTES", "MOYENNE");
         for(Etudiant e : etudiants) {
             e.afficher();
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Cours)) return false;
+        Cours cours = (Cours) o;
+        return id == cours.id || nom.equalsIgnoreCase(cours.nom);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, nom.toLowerCase());
     }
 }
