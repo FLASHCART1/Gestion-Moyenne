@@ -1,0 +1,35 @@
+[
+  {
+    "id": 1,
+    "nom": "sanata",
+    "modules": []
+  },
+  {
+    "id": 1,
+    "nom": "azertyu",
+    "modules": [
+      {
+        "id": 1,
+        "nom": "azertyuiop",
+        "volumeHoraire": 30,
+        "etudiants": [],
+        "modelesEvaluations": [
+          {
+            "id": 1,
+            "nom": "Evaluation 1",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          },
+          {
+            "id": 2,
+            "nom": "Evaluation 2",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          }
+        ]
+      }
+    ]
+  }
+]

@@ -12,7 +12,37 @@
         "id": 1,
         "nom": "azertyuiop",
         "volumeHoraire": 30,
-        "etudiants": [],
+        "etudiants": [
+          {
+            "id": 1,
+            "nom": "OLADOKOU",
+            "prenom": "EMMANUEL JOSEPH",
+            "matricule": "24-ESATIC0179AE",
+            "evaluations": [
+              {
+                "id": 1,
+                "nom": "Evaluation 1",
+                "note": 10.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 2,
+                "nom": "Evaluation 2",
+                "note": 15.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 4,
+                "nom": "Interrogation1",
+                "note": 6.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          }
+        ],
         "modelesEvaluations": [
           {
             "id": 1,
@@ -24,6 +54,13 @@
           {
             "id": 2,
             "nom": "Evaluation 2",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          },
+          {
+            "id": 3,
+            "nom": "Interrogation1",
             "note": 0.0,
             "coeff": 1.0,
             "bonus": 0.0
