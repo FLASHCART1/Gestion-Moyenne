@@ -22,6 +22,7 @@ public class MainFrame extends JFrame {
     private DashboardPanel dashboardPanel;
     private ClasseDetailPanel classeDetailPanel;
     private CoursNotesPanel coursNotesPanel;
+    private JLabel lblStatus;
 
     public static final String DASHBOARD     = "DASHBOARD";
     public static final String CLASSE_DETAIL = "CLASSE_DETAIL";
@@ -79,11 +80,38 @@ public class MainFrame extends JFrame {
     // ==========================================================================
     
     private JPanel createStatusBar() {
-    	JPanel sB = new JPanel();
-    	sB.setLayout(new BoxLayout(sB, BoxLayout.X_AXIS));
-    	sB.setBackground(new Color(200, 200, 200));
-    	sB.setPreferredSize(new Dimension(0, 30));
-    	return sB;
+        JPanel sB = new JPanel(new BorderLayout());
+        sB.setBackground(new Color(210, 212, 215));
+        sB.setPreferredSize(new Dimension(0, 24));
+        sB.setBorder(BorderFactory.createMatteBorder(1, 0, 0, 0, new Color(180, 182, 185)));
+
+        // Zone gauche : message contextuel
+        lblStatus = new JLabel("  Pret");
+        lblStatus.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblStatus.setForeground(new Color(80, 80, 80));
+        sB.add(lblStatus, BorderLayout.CENTER);
+
+        // Separateur vertical + version collés à droite
+        JPanel rightPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 8, 2));
+        rightPanel.setOpaque(false);
+
+        JSeparator sep = new JSeparator(SwingConstants.VERTICAL);
+        sep.setPreferredSize(new Dimension(1, 16));
+        sep.setForeground(new Color(170, 172, 175));
+        rightPanel.add(sep);
+
+        JLabel lblVersion = new JLabel("v1.0  ");
+        lblVersion.setFont(new Font("Segoe UI", Font.PLAIN, 12));
+        lblVersion.setForeground(new Color(100, 100, 100));
+        rightPanel.add(lblVersion);
+
+        sB.add(rightPanel, BorderLayout.EAST);
+        return sB;
+    }
+
+    /** Met a jour le message a gauche de la barre de statut. */
+    public void setStatus(String message) {
+        lblStatus.setText("  " + message);
     }
     
 
