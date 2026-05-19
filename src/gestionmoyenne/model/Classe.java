@@ -20,7 +20,8 @@ public class Classe {
     }
     
     // CONSTRUCTEUR pour désérialisation JSON (Gson)
-    private Classe() {
+    @SuppressWarnings("unused")
+	private Classe() {
         this.id = 0; // Sera recalculé par le gestionnaire
         this.nom = "";
         this.modules = new ArrayList<>();

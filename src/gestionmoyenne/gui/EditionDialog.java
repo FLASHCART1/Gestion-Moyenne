@@ -13,6 +13,7 @@ import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+@SuppressWarnings("serial")
 public class EditionDialog extends JDialog {
     private final StringBuilder rapportTexte;
     

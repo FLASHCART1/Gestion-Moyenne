@@ -6,8 +6,11 @@ import gestionmoyenne.service.GestionnaireClasse;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 
+@SuppressWarnings("serial")
 public class DashboardPanel extends JPanel {
     private final MainFrame mainFrame;
     private final GestionnaireClasse gestionnaire;
@@ -30,11 +33,22 @@ public class DashboardPanel extends JPanel {
         topPanel.setOpaque(false);
         JButton btnNew = new JButton("+ Nouvelle Classe");
         btnNew.setBackground(new Color(0, 123, 255));
-        btnNew.setForeground(Color.WHITE);
+        btnNew.setForeground(Color.BLACK);
         btnNew.setFocusPainted(false);
         btnNew.addActionListener(e -> creerClasse());
         topPanel.add(btnNew, BorderLayout.EAST);
         add(topPanel, BorderLayout.NORTH);
+        
+     /*// ── Menu Edition ──────────────────────────────────────────────────────
+        JMenu menuEdition = new JMenu("Edition");
+        menuEdition.setFont(new Font("Segoe UI", Font.PLAIN, 14));
+        menuEdition.setMnemonic(KeyEvent.VK_E);
+        JMenuItem gestionClasse = new JMenuItem("Classe");
+        gestionClasse.setAccelerator(
+        	KeyStroke.getKeyStroke(KeyEvent.VK_C, InputEvent.SHIFT_DOWN_MASK));
+        gestionClasse.addActionListener(e -> creerClasse());
+        menuEdition.add(gestionClasse);
+        mainFrame.menuBar.add(menuEdition);*/
         
         // Container des cartes
         cardsContainer = new JPanel(new GridLayout(0, 3, 15, 15));
@@ -90,13 +104,13 @@ public class DashboardPanel extends JPanel {
         
         JButton btnOpen = new JButton("Ouvrir");
         btnOpen.setBackground(new Color(40, 167, 69));
-        btnOpen.setForeground(Color.WHITE);
+        btnOpen.setForeground(Color.BLACK);
         btnOpen.setFocusPainted(false);
         btnOpen.addActionListener(e -> mainFrame.showClasseDetail(classe));
         
         JButton btnDelete = new JButton("Supprimer");
         btnDelete.setBackground(new Color(220, 53, 69));
-        btnDelete.setForeground(Color.WHITE);
+        btnDelete.setForeground(Color.BLACK);
         btnDelete.setFocusPainted(false);
         btnDelete.addActionListener(e -> {
             int confirm = JOptionPane.showConfirmDialog(this, 
@@ -120,7 +134,7 @@ public class DashboardPanel extends JPanel {
         return card;
     }
     
-    private void creerClasse() {
+    public void creerClasse() {
         String nom = JOptionPane.showInputDialog(this, "Nom de la classe :", "Nouvelle Classe", JOptionPane.PLAIN_MESSAGE);
         if (nom != null && !nom.trim().isEmpty()) {
             try {

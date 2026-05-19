@@ -10,9 +10,11 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.io.File;
  
+@SuppressWarnings("serial")
 public class ClasseDetailPanel extends JPanel {
     private final MainFrame mainFrame;
-    private final GestionnaireClasse gestionnaire;
+    @SuppressWarnings("unused")
+	private final GestionnaireClasse gestionnaire;
     private Classe classe;
  
     private JLabel lblTitre;
@@ -117,7 +119,7 @@ public class ClasseDetailPanel extends JPanel {
  
         JButton btnOpen = new JButton("📋 Fiche de notes");
         btnOpen.setBackground(new Color(0, 123, 255));
-        btnOpen.setForeground(Color.WHITE);
+        btnOpen.setForeground(Color.BLACK);
         btnOpen.setFocusPainted(false);
         btnOpen.addActionListener(e -> mainFrame.showCoursNotes(classe, cours));
  
@@ -137,7 +139,7 @@ public class ClasseDetailPanel extends JPanel {
                 "Confirmation", JOptionPane.YES_NO_OPTION);
             if (confirm == JOptionPane.YES_OPTION) {
                 classe.supprimer_cours(cours.getNom());
-                gestionnaire.sauvegarder();
+                //gestionnaire.sauvegarder();
                 refresh();
             }
         });
@@ -169,7 +171,7 @@ public class ClasseDetailPanel extends JPanel {
                 String nom = txtNom.getText().trim();
                 int vh = Integer.parseInt(txtVH.getText().trim());
                 classe.ajouter_cours(nom, vh);
-                gestionnaire.sauvegarder();
+                //gestionnaire.sauvegarder();
                 refresh();
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
@@ -184,7 +186,7 @@ public class ClasseDetailPanel extends JPanel {
             File f = chooser.getSelectedFile();
             try {
                 int nb = importService.importerEtudiantsExcel(cours, f.getAbsolutePath());
-                gestionnaire.sauvegarder();
+                //gestionnaire.sauvegarder();
                 refresh();
                 JOptionPane.showMessageDialog(this, nb + " étudiants importés avec succès !");
             } catch (Exception ex) {
@@ -201,7 +203,7 @@ public class ClasseDetailPanel extends JPanel {
             File f = chooser.getSelectedFile();
             try {
                 int nb = importService.importerEtudiantsPDF(cours, f.getAbsolutePath());
-                gestionnaire.sauvegarder();
+                //gestionnaire.sauvegarder();
                 refresh();
                 JOptionPane.showMessageDialog(this, nb + " étudiants importés depuis le PDF !");
             } catch (Exception ex) {
