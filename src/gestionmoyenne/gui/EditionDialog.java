@@ -9,6 +9,7 @@ import gestionmoyenne.service.PDFExporter;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.Desktop;
 import java.io.File;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -76,14 +77,7 @@ public class EditionDialog extends JDialog {
         // Impression
         JButton btnPrint = new JButton("🖨 Imprimer");
         styleButton(btnPrint, new Color(0, 123, 255));
-        btnPrint.addActionListener(e -> {
-            try {
-                boolean ok = textArea.print();
-                if (ok) JOptionPane.showMessageDialog(this, "Impression envoyée !");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erreur d'impression : " + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        });
+        btnPrint.addActionListener(e -> imprimerViaPDF(cours, classe));
         
         // Export TXT
         JButton btnExportTxt = new JButton("📄 Exporter TXT");
@@ -107,6 +101,52 @@ public class EditionDialog extends JDialog {
         add(btnPanel, BorderLayout.SOUTH);
     }
     
+    private void imprimerViaPDF(Cours cours, Classe classe) {
+        if (!PDFExporter.isDisponible()) {
+            JOptionPane.showMessageDialog(this,
+                "La bibliothèque OpenPDF est requise pour l'impression.\n\n" +
+                "Ajoutez cette dépendance Maven :\n\n" +
+                "<dependency>\n" +
+                "    <groupId>com.github.librepdf</groupId>\n" +
+                "    <artifactId>openpdf</artifactId>\n" +
+                "    <version>1.3.30</version>\n" +
+                "</dependency>",
+                "Dépendance manquante",
+                JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        try {
+            // Génère un PDF temporaire puis l'envoie à l'imprimante
+            File tmp = File.createTempFile("fiche_notes_", ".pdf");
+            tmp.deleteOnExit();
+            PDFExporter.exporterFicheNotes(cours, classe, tmp);
+
+            // Ouverture via le lecteur PDF par défaut du système avec commande d'impression
+            Desktop desktop = Desktop.getDesktop();
+            if (desktop.isSupported(Desktop.Action.PRINT)) {
+                desktop.print(tmp);
+                JOptionPane.showMessageDialog(this, "Impression PDF envoyée !");
+            } else if (desktop.isSupported(Desktop.Action.OPEN)) {
+                // Fallback : ouvrir le PDF pour que l'utilisateur imprime manuellement
+                desktop.open(tmp);
+                JOptionPane.showMessageDialog(this,
+                    "L'impression directe n'est pas disponible sur ce système.\n" +
+                    "Le PDF a été ouvert — utilisez Fichier → Imprimer dans votre lecteur PDF.",
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this,
+                    "Impossible d'imprimer automatiquement.\n" +
+                    "PDF généré ici : " + tmp.getAbsolutePath(),
+                    "Information", JOptionPane.INFORMATION_MESSAGE);
+            }
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this,
+                "Erreur lors de l'impression PDF :\n" + ex.getMessage(),
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+            ex.printStackTrace();
+        }
+    }
+
     private void exporterTxt(Cours cours) {
         JFileChooser chooser = new JFileChooser();
         chooser.setSelectedFile(new File("Fiche_" + cours.getNom().replaceAll("\\s+", "_") + ".txt"));
