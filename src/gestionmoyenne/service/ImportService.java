@@ -1,7 +1,6 @@
 package gestionmoyenne.service;
 
 import gestionmoyenne.impor.ExcelReader;
-import gestionmoyenne.impor.PDFReader;
 import gestionmoyenne.model.Cours;
 import gestionmoyenne.model.Etudiant;
 import java.util.ArrayList;
@@ -9,11 +8,9 @@ import java.util.List;
 
 public class ImportService {
     private ExcelReader excelReader;
-    private PDFReader pdfReader;
     
     public ImportService() {
         this.excelReader = new ExcelReader();
-        this.pdfReader = new PDFReader();
     }
     
     public int importerEtudiantsExcel(Cours cours, String cheminFichier) {
@@ -47,39 +44,15 @@ public class ImportService {
         }
     }
     
-    public int importerEtudiantsPDF(Cours cours, String cheminFichier) {
-        if (cours == null) {
-            throw new IllegalArgumentException("Le cours ne peut pas être null");
-        }
-        
-        try {
-            ArrayList<Etudiant> importes = pdfReader.lireEtudiants(cheminFichier);
-            int ajoutes = 0;
-            for(Etudiant e : importes) {
-                try {
-                    cours.ajouter_Etu_Existant(e);
-                    ajoutes++;
-                } catch (IllegalStateException ex) {
-                    System.out.println("⚠️ Ignoré (doublon): " + e.getMatricule());
-                }
-            }
-            return ajoutes;
-        } catch(Exception e) {
-            throw new RuntimeException("Erreur import PDF: " + e.getMessage(), e);
-        }
-    }
-    
     /**
      * Import avec rapport détaillé
      */
-    public ImportResult importerAvecRapport(Cours cours, String cheminFichier, boolean estExcel) {
+    public ImportResult importerAvecRapport(Cours cours, String cheminFichier) {
         List<String> erreurs = new ArrayList<>();
         int succes = 0;
         
         try {
-            ArrayList<Etudiant> importes = estExcel ? 
-                excelReader.lireEtudiants(cheminFichier) : 
-                pdfReader.lireEtudiants(cheminFichier);
+            ArrayList<Etudiant> importes = excelReader.lireEtudiants(cheminFichier);
                 
             for (Etudiant e : importes) {
                 try {

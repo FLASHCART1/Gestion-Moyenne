@@ -126,9 +126,6 @@ public class ClasseDetailPanel extends JPanel {
         JButton btnImport = new JButton("📥 Import Excel");
         btnImport.addActionListener(e -> importerExcel(cours));
  
-        JButton btnImportPdf = new JButton("📥 Import PDF");
-        btnImportPdf.addActionListener(e -> importerPdf(cours));
- 
         JButton btnDelete = new JButton("🗑");
         btnDelete.setForeground(Color.RED);
         btnDelete.setContentAreaFilled(false);
@@ -147,7 +144,6 @@ public class ClasseDetailPanel extends JPanel {
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 5, 0));
         btnPanel.setOpaque(false);
         btnPanel.add(btnImport);
-        btnPanel.add(btnImportPdf);
         btnPanel.add(btnOpen);
         btnPanel.add(btnDelete);
  
@@ -191,23 +187,6 @@ public class ClasseDetailPanel extends JPanel {
                 JOptionPane.showMessageDialog(this, nb + " étudiants importés avec succès !");
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, "Erreur import :\n" + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
-            }
-        }
-    }
- 
-    private void importerPdf(Cours cours) {
-        JFileChooser chooser = new JFileChooser();
-        chooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter("PDF (.pdf)", "pdf"));
-        chooser.setDialogTitle("Choisir une liste d'étudiants PDF");
-        if (chooser.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-            File f = chooser.getSelectedFile();
-            try {
-                int nb = importService.importerEtudiantsPDF(cours, f.getAbsolutePath());
-                //gestionnaire.sauvegarder();
-                refresh();
-                JOptionPane.showMessageDialog(this, nb + " étudiants importés depuis le PDF !");
-            } catch (Exception ex) {
-                JOptionPane.showMessageDialog(this, "Erreur import PDF :\n" + ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
