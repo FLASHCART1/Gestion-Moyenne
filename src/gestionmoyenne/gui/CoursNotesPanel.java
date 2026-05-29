@@ -87,6 +87,16 @@ public class CoursNotesPanel extends JPanel {
         btnSupprimerEtu.setToolTipText("Sélectionnez une ligne puis cliquez pour supprimer l'étudiant");
         btnSupprimerEtu.addActionListener(e -> supprimerEtudiantSelectionne());
 
+        // Modifier l'étudiant sélectionné
+        JButton btnModifierEtu = new JButton("✏ Modifier étudiant");
+        btnModifierEtu.setToolTipText("Sélectionnez une ligne puis cliquez pour modifier les informations de l'étudiant");
+        btnModifierEtu.addActionListener(e -> modifierEtudiantSelectionne());
+
+        // Modifier une évaluation (nom / coefficient)
+        JButton btnModifierEval = new JButton("✏ Modifier évaluation");
+        btnModifierEval.setToolTipText("Modifier le nom ou le coefficient d'une évaluation");
+        btnModifierEval.addActionListener(e -> modifierEvaluation());
+
         // Supprimer le cours courant (retourne à la vue classe)
         JButton btnSupprimerCours = new JButton("🗑 Supprimer ce cours");
         btnSupprimerCours.setForeground(new Color(180, 0, 0));
@@ -101,7 +111,10 @@ public class CoursNotesPanel extends JPanel {
         toolbar.add(btnAddEtu);
         toolbar.add(btnAddEval);
         toolbar.addSeparator();
+        toolbar.add(btnModifierEtu);
         toolbar.add(btnSupprimerEtu);
+        toolbar.addSeparator();
+        toolbar.add(btnModifierEval);
         toolbar.addSeparator();
         toolbar.add(btnBonus);
         toolbar.add(btnFormule);
@@ -138,6 +151,11 @@ public class CoursNotesPanel extends JPanel {
 
         // ── Menu contextuel (clic droit sur une ligne) ─────────────────────────
         JPopupMenu popupMenu = new JPopupMenu();
+
+        JMenuItem menuModifierEtu = new JMenuItem("✏ Modifier cet étudiant");
+        menuModifierEtu.addActionListener(e -> modifierEtudiantSelectionne());
+        popupMenu.add(menuModifierEtu);
+
         JMenuItem menuSupprimerEtu = new JMenuItem("🗑 Supprimer cet étudiant");
         menuSupprimerEtu.setForeground(new Color(180, 0, 0));
         menuSupprimerEtu.addActionListener(e -> supprimerEtudiantSelectionne());
@@ -180,7 +198,7 @@ public class CoursNotesPanel extends JPanel {
         carreJaune.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
         JLabel lblLegende = new JLabel("= Note à 0 : veuillez entrer 0 ou saisir une note  |  "
-            + "Double-cliquez pour modifier une note  |  Clic droit pour supprimer un étudiant.");
+            + "Double-cliquez pour modifier une note  |  Clic droit : modifier / supprimer un étudiant.");
         lblLegende.setFont(new Font("Segoe UI", Font.ITALIC, 12));
         lblLegende.setForeground(Color.DARK_GRAY);
 
@@ -333,6 +351,125 @@ public class CoursNotesPanel extends JPanel {
             } catch (Exception ex) {
                 JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
             }
+        }
+    }
+
+    /**
+     * Ouvre un dialogue pré-rempli pour modifier le nom, le prénom
+     * et le matricule de l'étudiant sélectionné.
+     */
+    private void modifierEtudiantSelectionne() {
+        int row = table.getSelectedRow();
+        if (row < 0) {
+            JOptionPane.showMessageDialog(this,
+                "Veuillez sélectionner un étudiant dans le tableau.",
+                "Aucune sélection", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String ancienMatricule = (String) model.getValueAt(row, COL_MATRICULE);
+        Etudiant etu = findEtudiant(ancienMatricule);
+        if (etu == null) return;
+
+        // Champs pré-remplis avec les valeurs actuelles
+        JTextField txtNom    = new JTextField(etu.getNom());
+        JTextField txtPrenom = new JTextField(etu.getPrenom());
+        JTextField txtMat    = new JTextField(etu.getMatricule());
+
+        Object[] msg = {
+            "Nom :",       txtNom,
+            "Prénom :",    txtPrenom,
+            "Matricule :", txtMat
+        };
+
+        int opt = JOptionPane.showConfirmDialog(this, msg,
+            "Modifier l'étudiant", JOptionPane.OK_CANCEL_OPTION);
+        if (opt != JOptionPane.OK_OPTION) return;
+
+        String nouveauNom    = txtNom.getText().trim();
+        String nouveauPrenom = txtPrenom.getText().trim();
+        String nouveauMat    = txtMat.getText().trim().toUpperCase();
+
+        // Validation de base
+        if (nouveauNom.isEmpty() || nouveauPrenom.isEmpty() || nouveauMat.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Tous les champs sont obligatoires.", "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        // Vérifier que le nouveau matricule n'est pas déjà pris par un AUTRE étudiant
+        if (!nouveauMat.equalsIgnoreCase(ancienMatricule) && cours.existeEtudiant(nouveauMat)) {
+            JOptionPane.showMessageDialog(this,
+                "Le matricule \"" + nouveauMat + "\" est déjà utilisé par un autre étudiant.",
+                "Erreur", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+
+        try {
+            etu.setNom(nouveauNom);
+            etu.setPrenom(nouveauPrenom);
+            etu.setMatricule(nouveauMat);
+            //gestionnaire.sauvegarder();
+            rebuildTable();
+            // Resélectionner la même ligne
+            if (row < table.getRowCount()) table.setRowSelectionInterval(row, row);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    /**
+     * Ouvre un dialogue pour choisir une évaluation du cours
+     * puis modifier son nom et/ou son coefficient.
+     */
+    private void modifierEvaluation() {
+        ArrayList<Evaluation> modeles = cours.getModelesEvaluations();
+        if (modeles.isEmpty()) {
+            JOptionPane.showMessageDialog(this,
+                "Ce cours ne contient aucune évaluation à modifier.",
+                "Aucune évaluation", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        // Choisir quelle évaluation modifier
+        String[] options = modeles.stream().map(Evaluation::getNom).toArray(String[]::new);
+        String choix = (String) JOptionPane.showInputDialog(this,
+            "Choisir l'évaluation à modifier :",
+            "Modifier une évaluation",
+            JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
+        if (choix == null) return;
+
+        // Trouver l'objet Evaluation correspondant
+        Evaluation evChoisie = modeles.stream()
+            .filter(ev -> ev.getNom().equalsIgnoreCase(choix))
+            .findFirst().orElse(null);
+        if (evChoisie == null) return;
+
+        // Champs pré-remplis
+        JTextField txtNom  = new JTextField(evChoisie.getNom());
+        JTextField txtCoef = new JTextField(String.valueOf(evChoisie.getCoeff()));
+
+        Object[] msg = {
+            "Nom de l'évaluation :", txtNom,
+            "Coefficient :",         txtCoef
+        };
+
+        int opt = JOptionPane.showConfirmDialog(this, msg,
+            "Modifier l'évaluation", JOptionPane.OK_CANCEL_OPTION);
+        if (opt != JOptionPane.OK_OPTION) return;
+
+        try {
+            String nouveauNom  = txtNom.getText().trim();
+            double nouveauCoef = Double.parseDouble(txtCoef.getText().trim());
+
+            cours.modifierTypeEvaluation(choix, nouveauNom, nouveauCoef);
+            //gestionnaire.sauvegarder();
+            rebuildTable();
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this,
+                "Le coefficient doit être un nombre valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
     }
 

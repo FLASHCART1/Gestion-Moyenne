@@ -126,6 +126,53 @@ public class Cours {
         }
     }
  
+    /**
+     * Modifie le nom et/ou le coefficient d'une évaluation existante.
+     * La modification est propagée à tous les étudiants inscrits.
+     *
+     * @param ancienNom  Nom actuel de l'évaluation (recherche insensible à la casse)
+     * @param nouveauNom Nouveau nom souhaité
+     * @param nouveauCoef Nouveau coefficient (doit être > 0)
+     */
+    public void modifierTypeEvaluation(String ancienNom, String nouveauNom, double nouveauCoef) {
+        if (nouveauNom == null || nouveauNom.trim().isEmpty())
+            throw new IllegalArgumentException("Le nom de l'évaluation ne peut pas être vide");
+        if (nouveauCoef <= 0)
+            throw new IllegalArgumentException("Le coefficient doit être strictement positif");
+
+        // Vérifier que le nouveau nom n'est pas déjà utilisé par une AUTRE évaluation
+        if (!nouveauNom.equalsIgnoreCase(ancienNom)) {
+            for (Evaluation ev : modelesEvaluations) {
+                if (ev.getNom().equalsIgnoreCase(nouveauNom))
+                    throw new IllegalStateException("Une évaluation avec ce nom existe déjà : " + nouveauNom);
+            }
+        }
+
+        // Mettre à jour le modèle du cours
+        boolean trouve = false;
+        for (Evaluation ev : modelesEvaluations) {
+            if (ev.getNom().equalsIgnoreCase(ancienNom)) {
+                ev.setNom(nouveauNom.trim());
+                ev.setCoeff(nouveauCoef);
+                trouve = true;
+                break;
+            }
+        }
+        if (!trouve)
+            throw new IllegalArgumentException("Évaluation introuvable : " + ancienNom);
+
+        // Propager la modification à chaque étudiant
+        for (Etudiant e : etudiants) {
+            for (Evaluation ev : e.getEvaluationsInterne()) {
+                if (ev.getNom().equalsIgnoreCase(ancienNom)) {
+                    ev.setNom(nouveauNom.trim());
+                    ev.setCoeff(nouveauCoef);
+                    break;
+                }
+            }
+        }
+    }
+
     public void ajouter_Etu(String nom, String prenom, String matricule) {
         if (existeEtudiant(matricule))
             throw new IllegalStateException("Un étudiant avec ce matricule existe déjà : " + matricule);

@@ -2,7 +2,362 @@
   {
     "id": 1,
     "nom": "azerty",
-    "modules": []
+    "modules": [
+      {
+        "id": 1,
+        "nom": "azertyuiop^^",
+        "volumeHoraire": 30,
+        "formule": "STANDARD",
+        "etudiants": [
+          {
+            "id": 1,
+            "nom": "KONÉ",
+            "prenom": "Moussa",
+            "matricule": "24-ESATIC1101PA",
+            "evaluations": [
+              {
+                "id": 3,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 4,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 2,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC3372RZ",
+            "evaluations": [
+              {
+                "id": 5,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 6,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 3,
+            "nom": "DIALLO",
+            "prenom": "Dramane",
+            "matricule": "24-ESATIC5910JR",
+            "evaluations": [
+              {
+                "id": 7,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 8,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 4,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC1046TL",
+            "evaluations": [
+              {
+                "id": 9,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 10,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 5,
+            "nom": "BROU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2921SP",
+            "evaluations": [
+              {
+                "id": 11,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 12,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 6,
+            "nom": "KASSI",
+            "prenom": "Ali",
+            "matricule": "24-ESATIC1425GL",
+            "evaluations": [
+              {
+                "id": 13,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 14,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 7,
+            "nom": "BAMBA",
+            "prenom": "Adjoua",
+            "matricule": "24-ESATIC7973XM",
+            "evaluations": [
+              {
+                "id": 15,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 16,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 8,
+            "nom": "TRAORÉ",
+            "prenom": "Estelle",
+            "matricule": "24-ESATIC5928CV",
+            "evaluations": [
+              {
+                "id": 17,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 18,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 9,
+            "nom": "TOURÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC8761KV",
+            "evaluations": [
+              {
+                "id": 19,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 20,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 10,
+            "nom": "GNAGNON",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC9737PA",
+            "evaluations": [
+              {
+                "id": 21,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 22,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 11,
+            "nom": "KONÉ",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC1028YR",
+            "evaluations": [
+              {
+                "id": 23,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 24,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 12,
+            "nom": "OUATTARA",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC5931DA",
+            "evaluations": [
+              {
+                "id": 25,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 26,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 13,
+            "nom": "BAMBA",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC4291SC",
+            "evaluations": [
+              {
+                "id": 27,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 28,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 14,
+            "nom": "AHOU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2735YN",
+            "evaluations": [
+              {
+                "id": 29,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 30,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 15,
+            "nom": "GNAGNON",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC8281LI",
+            "evaluations": [
+              {
+                "id": 31,
+                "nom": "Interrogation 1",
+                "note": 0.0,
+                "coeff": 0.5,
+                "bonus": 0.0
+              },
+              {
+                "id": 32,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          }
+        ],
+        "modelesEvaluations": [
+          {
+            "id": 1,
+            "nom": "Interrogation 1",
+            "note": 0.0,
+            "coeff": 0.5,
+            "bonus": 0.0
+          },
+          {
+            "id": 2,
+            "nom": "Evaluation 2",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          }
+        ]
+      }
+    ]
   },
   {
     "id": 2,

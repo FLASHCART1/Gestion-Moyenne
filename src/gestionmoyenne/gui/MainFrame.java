@@ -148,7 +148,7 @@ public class MainFrame extends JFrame {
         itemEnregistrerSous.addActionListener(e -> actionEnregistrerSous());
 
         // ── Charger un fichier JSON ───────────────────────────────────────────
-        JMenuItem itemCharger = new JMenuItem("Charger un fichier JSON...");
+        JMenuItem itemCharger = new JMenuItem("Charger un fichier GDM...");
         itemCharger.setAccelerator(
             KeyStroke.getKeyStroke(KeyEvent.VK_O, InputEvent.CTRL_DOWN_MASK));
         itemCharger.addActionListener(e -> actionChargerJson());
