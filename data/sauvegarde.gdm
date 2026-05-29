@@ -20,7 +20,7 @@
                 "nom": "Interrogation 1",
                 "note": 0.0,
                 "coeff": 0.5,
-                "bonus": 0.0
+                "bonus": -5.0
               },
               {
                 "id": 4,

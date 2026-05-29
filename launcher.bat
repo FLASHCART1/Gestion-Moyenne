@@ -6,7 +6,7 @@ title Gestion des Moyennes - Lanceur
 ::  CONFIGURATION
 :: ============================================================
 set "MIN_JAVA=26"
-set "JAR_URL=https://github.com/FLASHCART1/Gestion-Moyenne/releases/download/beta/Gestion.Moyennes.jar"
+set "JAR_URL=https://github.com/FLASHCART1/Gestion-Moyenne/releases/download/Release/Gestion.Moyennes.jar"
 set "JAR_NAME=Gestion.Moyennes.jar"
 set "JAVA_DL_URL=https://api.adoptium.net/v3/installer/latest/26/ga/windows/x64/jdk/hotspot/normal/eclipse"
 set "JAVA_INSTALLER=java26_installer.msi"
