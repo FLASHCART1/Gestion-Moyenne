@@ -75,18 +75,21 @@ public class EditionDialog extends JDialog {
         JPanel btnPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 10));
         
         // Impression
-        JButton btnPrint = new JButton("🖨 Imprimer");
+        JButton btnPrint = new JButton("Imprimer");
         styleButton(btnPrint, new Color(0, 123, 255));
+        btnPrint.setForeground(Color.BLACK);
         btnPrint.addActionListener(e -> imprimerViaPDF(cours, classe));
         
         // Export TXT
-        JButton btnExportTxt = new JButton("📄 Exporter TXT");
+        JButton btnExportTxt = new JButton("Exporter TXT");
         styleButton(btnExportTxt, new Color(108, 117, 125));
+        btnExportTxt.setForeground(Color.BLACK);
         btnExportTxt.addActionListener(e -> exporterTxt(cours));
         
         // Export PDF
-        JButton btnExportPdf = new JButton("📕 Exporter PDF");
+        JButton btnExportPdf = new JButton("Exporter PDF");
         styleButton(btnExportPdf, new Color(220, 53, 69));
+        btnExportPdf.setForeground(Color.BLACK);
         btnExportPdf.addActionListener(e -> exporterPdf(cours, classe));
         
         // Fermer
