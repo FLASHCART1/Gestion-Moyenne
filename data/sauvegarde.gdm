@@ -356,6 +356,360 @@
             "bonus": 0.0
           }
         ]
+      },
+      {
+        "id": 3,
+        "nom": "aze",
+        "volumeHoraire": 30,
+        "formule": "STANDARD",
+        "etudiants": [
+          {
+            "id": 31,
+            "nom": "KONÉ",
+            "prenom": "Moussa",
+            "matricule": "24-ESATIC1101PE",
+            "evaluations": [
+              {
+                "id": 67,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 68,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 32,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC3372RZ",
+            "evaluations": [
+              {
+                "id": 69,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 70,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 33,
+            "nom": "DIALLO",
+            "prenom": "Dramane",
+            "matricule": "24-ESATIC5910JR",
+            "evaluations": [
+              {
+                "id": 71,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 72,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 34,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC1046TL",
+            "evaluations": [
+              {
+                "id": 73,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 74,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 35,
+            "nom": "BROU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2921SP",
+            "evaluations": [
+              {
+                "id": 75,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 76,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 36,
+            "nom": "KASSI",
+            "prenom": "Ali",
+            "matricule": "24-ESATIC1425GL",
+            "evaluations": [
+              {
+                "id": 77,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 78,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 37,
+            "nom": "BAMBA",
+            "prenom": "Adjoua",
+            "matricule": "24-ESATIC7973XM",
+            "evaluations": [
+              {
+                "id": 79,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 80,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 38,
+            "nom": "TRAORÉ",
+            "prenom": "Estelle",
+            "matricule": "24-ESATIC5928CV",
+            "evaluations": [
+              {
+                "id": 81,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 82,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 39,
+            "nom": "TOURÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC8761KV",
+            "evaluations": [
+              {
+                "id": 83,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 84,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 40,
+            "nom": "GNAGNON",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC9737PA",
+            "evaluations": [
+              {
+                "id": 85,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 86,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 41,
+            "nom": "KONÉ",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC1028YR",
+            "evaluations": [
+              {
+                "id": 87,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 88,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 42,
+            "nom": "OUATTARA",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC5931DA",
+            "evaluations": [
+              {
+                "id": 89,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 90,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 43,
+            "nom": "BAMBA",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC4291SC",
+            "evaluations": [
+              {
+                "id": 91,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 92,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 44,
+            "nom": "AHOU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2735YN",
+            "evaluations": [
+              {
+                "id": 93,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 94,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 45,
+            "nom": "GNAGNON",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC8281LI",
+            "evaluations": [
+              {
+                "id": 95,
+                "nom": "Evaluation 1",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 96,
+                "nom": "Evaluation 2",
+                "note": 0.0,
+                "coeff": 1.0,
+                "bonus": 0.0
+              }
+            ]
+          }
+        ],
+        "modelesEvaluations": [
+          {
+            "id": 65,
+            "nom": "Evaluation 1",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          },
+          {
+            "id": 66,
+            "nom": "Evaluation 2",
+            "note": 0.0,
+            "coeff": 1.0,
+            "bonus": 0.0
+          }
+        ]
       }
     ]
   },
@@ -403,5 +757,365 @@
     "id": 10,
     "nom": "o",
     "modules": []
+  },
+  {
+    "id": 11,
+    "nom": "SIGL2",
+    "modules": [
+      {
+        "id": 2,
+        "nom": "JAVA",
+        "volumeHoraire": 36,
+        "formule": "STANDARD",
+        "etudiants": [
+          {
+            "id": 16,
+            "nom": "KONÉ",
+            "prenom": "Moussa",
+            "matricule": "24-ESATIC1101PE",
+            "evaluations": [
+              {
+                "id": 35,
+                "nom": "DEVOIR",
+                "note": 10.0,
+                "coeff": 2.0,
+                "bonus": 2.0
+              },
+              {
+                "id": 36,
+                "nom": "PROJET",
+                "note": 15.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 17,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC3372RZ",
+            "evaluations": [
+              {
+                "id": 37,
+                "nom": "DEVOIR",
+                "note": 14.0,
+                "coeff": 2.0,
+                "bonus": 2.0
+              },
+              {
+                "id": 38,
+                "nom": "PROJET",
+                "note": 8.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 18,
+            "nom": "DIALLO",
+            "prenom": "Dramane",
+            "matricule": "24-ESATIC5910JR",
+            "evaluations": [
+              {
+                "id": 39,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 40,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 19,
+            "nom": "KONATÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC1046TL",
+            "evaluations": [
+              {
+                "id": 41,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 42,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 20,
+            "nom": "BROU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2921SP",
+            "evaluations": [
+              {
+                "id": 43,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 44,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 21,
+            "nom": "KASSI",
+            "prenom": "Ali",
+            "matricule": "24-ESATIC1425GL",
+            "evaluations": [
+              {
+                "id": 45,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 46,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 22,
+            "nom": "BAMBA",
+            "prenom": "Adjoua",
+            "matricule": "24-ESATIC7973XM",
+            "evaluations": [
+              {
+                "id": 47,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 48,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 23,
+            "nom": "TRAORÉ",
+            "prenom": "Estelle",
+            "matricule": "24-ESATIC5928CV",
+            "evaluations": [
+              {
+                "id": 49,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 50,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 24,
+            "nom": "TOURÉ",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC8761KV",
+            "evaluations": [
+              {
+                "id": 51,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 52,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 25,
+            "nom": "GNAGNON",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC9737PA",
+            "evaluations": [
+              {
+                "id": 53,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 54,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 26,
+            "nom": "KONÉ",
+            "prenom": "Kouassi",
+            "matricule": "24-ESATIC1028YR",
+            "evaluations": [
+              {
+                "id": 55,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 56,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 27,
+            "nom": "OUATTARA",
+            "prenom": "Jean-Pierre",
+            "matricule": "24-ESATIC5931DA",
+            "evaluations": [
+              {
+                "id": 57,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 58,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 28,
+            "nom": "BAMBA",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC4291SC",
+            "evaluations": [
+              {
+                "id": 59,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 60,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 29,
+            "nom": "AHOU",
+            "prenom": "Issa",
+            "matricule": "24-ESATIC2735YN",
+            "evaluations": [
+              {
+                "id": 61,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 62,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          },
+          {
+            "id": 30,
+            "nom": "GNAGNON",
+            "prenom": "Fatou",
+            "matricule": "24-ESATIC8281LI",
+            "evaluations": [
+              {
+                "id": 63,
+                "nom": "DEVOIR",
+                "note": 0.0,
+                "coeff": 2.0,
+                "bonus": 0.0
+              },
+              {
+                "id": 64,
+                "nom": "PROJET",
+                "note": 0.0,
+                "coeff": 3.0,
+                "bonus": 0.0
+              }
+            ]
+          }
+        ],
+        "modelesEvaluations": [
+          {
+            "id": 33,
+            "nom": "DEVOIR",
+            "note": 0.0,
+            "coeff": 2.0,
+            "bonus": 0.0
+          },
+          {
+            "id": 34,
+            "nom": "PROJET",
+            "note": 0.0,
+            "coeff": 3.0,
+            "bonus": 0.0
+          }
+        ]
+      }
+    ]
   }
 ]

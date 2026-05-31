@@ -33,9 +33,24 @@ public class CoursNotesPanel extends JPanel {
     private static final int COL_OFFSET_NOTES = 3;
 
     // Couleurs pour le renderer des notes
-    private static final Color COLOR_NOTE_VIDE   = new Color(255, 243, 205);
-    private static final Color COLOR_NOTE_NORMALE = Color.WHITE;
-    private static final Color COLOR_MOYENNE_BG   = new Color(230, 230, 230);
+    private static final Color COLOR_NOTE_VIDE    = new Color(255, 243, 205);
+    private static final Color COLOR_NOTE_NORMALE  = Color.WHITE;
+    private static final Color COLOR_MOYENNE_BG    = new Color(230, 230, 230);
+    private static final Color COLOR_BONUS_BG      = new Color(220, 245, 220); // vert clair
+    private static final Color COLOR_MALUS_BG      = new Color(255, 220, 220); // rouge clair
+    private static final Color COLOR_BONUS_FG      = new Color(0, 128, 0);
+    private static final Color COLOR_MALUS_FG      = new Color(180, 0, 0);
+
+    /**
+     * Objet stocké dans les cellules de notes pour conserver note brute + bonus.
+     */
+    static class NoteData {
+        final double note;
+        final double bonus;
+        NoteData(double note, double bonus) { this.note = note; this.bonus = bonus; }
+        double noteFinale() { return Math.max(0, Math.min(20, note + bonus)); }
+        @Override public String toString() { return String.valueOf(note); }
+    }
 
     public CoursNotesPanel(MainFrame mainFrame, GestionnaireClasse gestionnaire) {
         this.mainFrame    = mainFrame;
@@ -197,13 +212,40 @@ public class CoursNotesPanel extends JPanel {
         carreJaune.setBackground(COLOR_NOTE_VIDE);
         carreJaune.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
 
-        JLabel lblLegende = new JLabel("= Note à 0 : veuillez entrer 0 ou saisir une note  |  "
-            + "Double-cliquez pour modifier une note  |  Clic droit : modifier / supprimer un étudiant.");
+        JLabel carreVert = new JLabel("  ");
+        carreVert.setOpaque(true);
+        carreVert.setBackground(COLOR_BONUS_BG);
+        carreVert.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+
+        JLabel carreRouge = new JLabel("  ");
+        carreRouge.setOpaque(true);
+        carreRouge.setBackground(COLOR_MALUS_BG);
+        carreRouge.setBorder(BorderFactory.createLineBorder(Color.LIGHT_GRAY));
+
+        JLabel lblLegende = new JLabel(
+            "= Note vide   ");
         lblLegende.setFont(new Font("Segoe UI", Font.ITALIC, 12));
         lblLegende.setForeground(Color.DARK_GRAY);
 
+        JLabel lblBonus = new JLabel("= Bonus appliqué   ");
+        lblBonus.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+        lblBonus.setForeground(COLOR_BONUS_FG);
+
+        JLabel lblMalus = new JLabel("= Malus appliqué   ");
+        lblMalus.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+        lblMalus.setForeground(COLOR_MALUS_FG);
+
+        JLabel lblConsigne = new JLabel("| Double-cliquez pour modifier une note  |  Clic droit : modifier / supprimer un étudiant.");
+        lblConsigne.setFont(new Font("Segoe UI", Font.ITALIC, 12));
+        lblConsigne.setForeground(Color.DARK_GRAY);
+
         legendePanel.add(carreJaune);
         legendePanel.add(lblLegende);
+        legendePanel.add(carreVert);
+        legendePanel.add(lblBonus);
+        legendePanel.add(carreRouge);
+        legendePanel.add(lblMalus);
+        legendePanel.add(lblConsigne);
         add(legendePanel, BorderLayout.SOUTH);
     }
 
@@ -242,7 +284,11 @@ public class CoursNotesPanel extends JPanel {
 
             ArrayList<Evaluation> evals = e.getEvaluations();
             for (int i = 0; i < nomsEvaluations.size(); i++) {
-                row.add(i < evals.size() ? evals.get(i).getNote() : 0.0);
+                if (i < evals.size()) {
+                    row.add(new NoteData(evals.get(i).getNote(), evals.get(i).getBonus()));
+                } else {
+                    row.add(new NoteData(0.0, 0.0));
+                }
             }
 
             double moy = Calculateur.calculerAvecFormule(e.getEvaluations(), cours.getFormule());
@@ -250,22 +296,50 @@ public class CoursNotesPanel extends JPanel {
             model.addRow(row.toArray());
         }
 
-        // Renderer colonnes de notes : jaune si valeur == 0
+        // Renderer colonnes de notes : affiche note brute + bonus/malus
         DefaultTableCellRenderer noteRenderer = new DefaultTableCellRenderer() {
             @Override
             public Component getTableCellRendererComponent(JTable t, Object value,
                     boolean isSelected, boolean hasFocus, int row, int col) {
-                Component c = super.getTableCellRendererComponent(t, value, isSelected, hasFocus, row, col);
+                NoteData nd = (value instanceof NoteData) ? (NoteData) value : new NoteData(parseNote(value), 0.0);
+
+                // Texte affiché dans la cellule
+                String affichage;
+                if (nd.bonus > 0) {
+                    affichage = String.format("%.1f  (+%.1f)", nd.note, nd.bonus);
+                } else if (nd.bonus < 0) {
+                    affichage = String.format("%.1f  (%.1f)", nd.note, nd.bonus);
+                } else {
+                    affichage = String.format("%.1f", nd.note);
+                }
+
+                Component c = super.getTableCellRendererComponent(t, affichage, isSelected, hasFocus, row, col);
                 setHorizontalAlignment(SwingConstants.CENTER);
+
                 if (!isSelected) {
-                    double note = parseNote(value);
-                    if (note == 0.0) {
+                    if (nd.bonus > 0) {
+                        c.setBackground(COLOR_BONUS_BG);
+                        setForeground(COLOR_BONUS_FG);
+                        setToolTipText(String.format(
+                            "<html>Note brute : <b>%.1f</b><br>Bonus : <b style='color:green'>+%.1f</b><br>Note finale : <b>%.1f / 20</b></html>",
+                            nd.note, nd.bonus, nd.noteFinale()));
+                    } else if (nd.bonus < 0) {
+                        c.setBackground(COLOR_MALUS_BG);
+                        setForeground(COLOR_MALUS_FG);
+                        setToolTipText(String.format(
+                            "<html>Note brute : <b>%.1f</b><br>Malus : <b style='color:red'>%.1f</b><br>Note finale : <b>%.1f / 20</b></html>",
+                            nd.note, nd.bonus, nd.noteFinale()));
+                    } else if (nd.note == 0.0) {
                         c.setBackground(COLOR_NOTE_VIDE);
+                        setForeground(Color.BLACK);
                         setToolTipText("Veuillez entrer 0 ou saisir une note");
                     } else {
                         c.setBackground(COLOR_NOTE_NORMALE);
+                        setForeground(Color.BLACK);
                         setToolTipText(null);
                     }
+                } else {
+                    setForeground(Color.WHITE);
                 }
                 return c;
             }
@@ -310,7 +384,10 @@ public class CoursNotesPanel extends JPanel {
             if (etu == null) return;
 
             String nomEval = nomsEvaluations.get(col - COL_OFFSET_NOTES);
-            double note = parseNote(model.getValueAt(row, col));
+            Object rawValue = model.getValueAt(row, col);
+            double note = (rawValue instanceof NoteData)
+                ? ((NoteData) rawValue).note
+                : parseNote(rawValue);
 
             if (note < 0 || note > 20) {
                 JOptionPane.showMessageDialog(this,
@@ -320,6 +397,17 @@ public class CoursNotesPanel extends JPanel {
             }
 
             etu.modifierNoteParNom(nomEval, note);
+
+            // Reconstruire le NoteData avec le bonus existant (on ne le modifie pas ici)
+            Etudiant etuFresh = findEtudiant(matricule);
+            if (etuFresh != null) {
+                for (Evaluation ev : etuFresh.getEvaluations()) {
+                    if (ev.getNom().equalsIgnoreCase(nomEval)) {
+                        model.setValueAt(new NoteData(ev.getNote(), ev.getBonus()), row, col);
+                        break;
+                    }
+                }
+            }
 
             double moy = Calculateur.calculerAvecFormule(etu.getEvaluations(), cours.getFormule());
             model.setValueAt(
@@ -580,26 +668,54 @@ public class CoursNotesPanel extends JPanel {
             return;
         }
 
-        String[] options = evals.stream().map(Evaluation::getNom).toArray(String[]::new);
+        // Afficher le bonus actuel dans les options
+        String[] options = evals.stream()
+            .map(ev -> {
+                double b = ev.getBonus();
+                String bonusStr = (b == 0) ? "aucun" : String.format("%+.1f", b);
+                return String.format("%s (note: %.1f, bonus actuel: %s)", ev.getNom(), ev.getNote(), bonusStr);
+            })
+            .toArray(String[]::new);
+
         String choix = (String) JOptionPane.showInputDialog(this,
-            "Choisir l'évaluation :", "Bonus/Malus",
+            "<html>Choisir l'évaluation à modifier :<br><i>(le bonus actuel est indiqué entre parenthèses)</i></html>",
+            "Bonus/Malus",
             JOptionPane.QUESTION_MESSAGE, null, options, options[0]);
         if (choix == null) return;
 
+        // Retrouver l'évaluation sélectionnée par index
+        int indexChoix = -1;
+        for (int i = 0; i < options.length; i++) {
+            if (options[i].equals(choix)) { indexChoix = i; break; }
+        }
+        if (indexChoix < 0) return;
+
+        Evaluation evChoisie = evals.get(indexChoix);
+        String valDefaut = evChoisie.getBonus() == 0 ? "0.0" : String.format("%.1f", evChoisie.getBonus());
+
         String val = JOptionPane.showInputDialog(this,
-            "Valeur du bonus/malus (négatif pour malus) :", "0.0");
+            String.format("<html>Bonus/malus pour <b>%s</b> de <b>%s %s</b><br>"
+                + "Note brute : <b>%.1f</b><br><br>"
+                + "Entrez une valeur (négatif = malus, 0 = supprimer) :</html>",
+                evChoisie.getNom(), etu.getNom(), etu.getPrenom(), evChoisie.getNote()),
+            valDefaut);
         if (val == null) return;
 
         try {
             double bonus = Double.parseDouble(val.trim());
-            for (int i = 0; i < evals.size(); i++) {
-                if (evals.get(i).getNom().equals(choix)) {
-                    etu.appliquerBonusMalus(i, bonus);
-                    break;
-                }
-            }
+            etu.appliquerBonusMalus(indexChoix, bonus);
             //gestionnaire.sauvegarder();
             rebuildTable();
+            // Resélectionner la ligne
+            if (row < table.getRowCount()) table.setRowSelectionInterval(row, row);
+
+            String msg = (bonus == 0)
+                ? "Bonus/malus supprimé pour " + evChoisie.getNom()
+                : String.format("Bonus/malus de %+.1f appliqué à \"%s\".\nNote finale : %.1f/20",
+                    bonus, evChoisie.getNom(), evChoisie.getNoteFinale());
+            JOptionPane.showMessageDialog(this, msg, "Bonus/Malus appliqué", JOptionPane.INFORMATION_MESSAGE);
+        } catch (NumberFormatException ex) {
+            JOptionPane.showMessageDialog(this, "Valeur invalide. Entrez un nombre (ex: 1.5 ou -2.0).", "Erreur", JOptionPane.ERROR_MESSAGE);
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(this, ex.getMessage(), "Erreur", JOptionPane.ERROR_MESSAGE);
         }
@@ -642,9 +758,10 @@ public class CoursNotesPanel extends JPanel {
     }
 
     private double parseNote(Object value) {
+        if (value instanceof NoteData) return ((NoteData) value).note;
         if (value instanceof Number) return ((Number) value).doubleValue();
         if (value != null) {
-            try { return Double.parseDouble(value.toString()); }
+            try { return Double.parseDouble(value.toString().trim()); }
             catch (NumberFormatException ignored) {}
         }
         return 0.0;

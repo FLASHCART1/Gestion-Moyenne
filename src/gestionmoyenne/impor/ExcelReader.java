@@ -26,6 +26,8 @@ public class ExcelReader {
     private int colMatricule = -1;
     private int colNom       = -1;
     private int colPrenom    = -1;
+    private int colNote1     = -1;
+    private int colNote2     = -1;
  
     public ArrayList<Etudiant> lireEtudiants(String cheminFichier) throws Exception {
         if (cheminFichier == null || !cheminFichier.toLowerCase().endsWith(".xlsx")) {
@@ -66,10 +68,12 @@ public class ExcelReader {
                 //  si seulement 1 ou 2 colonnes étaient trouvées)
                 if (headerLu && (colNom == -1 || colPrenom == -1)) {
                     // Si Nom ou Prénom non trouvés, on essaie l'ordre par défaut
-                    if (colMatricule == -1 && colNom == -1 && colPrenom == -1) {
+                    if (colMatricule == -1 && colNom == -1 && colPrenom == -1 && colNote1 == -1 &&colNote2 == -1) {
                         colMatricule = 0;
                         colNom       = 1;
                         colPrenom    = 2;
+                        colNote1     = 3;
+                        colNote2     = 4;
                         System.out.println("⚠️ En-tête non reconnu — repli sur l'ordre par défaut (Matricule|Nom|Prénom)");
                     }
                 }
@@ -78,10 +82,12 @@ public class ExcelReader {
                 String nom       = colNom       >= 0 ? getCellString(row.getCell(colNom))       : "";
                 String prenom    = colPrenom    >= 0 ? getCellString(row.getCell(colPrenom))    : "";
                 String matricule = colMatricule >= 0 ? getCellString(row.getCell(colMatricule)) : "";
+                String note1     = colNote1     >= 0 ? getCellString(row.getCell(colNote1))     : "";
+                String note2     = colNote2     >= 0 ? getCellString(row.getCell(colNote2))     : "";
  
                 int ligneNum = row.getRowNum() + 1;
  
-                if (nom.isEmpty() && prenom.isEmpty() && matricule.isEmpty()) {
+                if (nom.isEmpty() && prenom.isEmpty() && matricule.isEmpty() && note1.isEmpty() && note2.isEmpty()) {
                     continue; // ligne vide, on ignore silencieusement
                 }
  
